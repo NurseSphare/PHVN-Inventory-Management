@@ -1,0 +1,453 @@
+{
+  "branches": {
+    "Airway Items": 1209433299,
+    "PPE": 95964904,
+    "Hygienic Items": 1897420450,
+    "Patient Care": 1603428471,
+    "Procedure Items": 119700726,
+    "Machine": 2076414666
+  },
+  "fields": [
+    {
+      "idx": 0,
+      "id": 1472241298,
+      "title": "Date",
+      "type": 9,
+      "options": [],
+      "isSection": false
+    },
+    {
+      "idx": 1,
+      "id": 1036016531,
+      "title": "Item Category",
+      "type": 2,
+      "options": [
+        "Airway Items",
+        "PPE",
+        "Hygienic Items",
+        "Patient Care",
+        "Procedure Items",
+        "Machine"
+      ],
+      "isSection": false
+    },
+    {
+      "idx": 2,
+      "id": 2076414666,
+      "title": "Machine Items",
+      "type": 8,
+      "options": [],
+      "isSection": true
+    },
+    {
+      "idx": 3,
+      "id": 1954953116,
+      "title": "Select Machine:",
+      "type": 2,
+      "options": [
+        "Ventilator",
+        "Suctioning Machine",
+        "Pulse ox",
+        "Nebulizer Machine",
+        "Feeding Pump",
+        "Oxygen clinder",
+        "Oxygen concentrator"
+      ],
+      "isSection": false
+    },
+    {
+      "idx": 4,
+      "id": 1962332692,
+      "title": "Machine Status",
+      "type": 8,
+      "options": [],
+      "isSection": true
+    },
+    {
+      "idx": 5,
+      "id": 281079703,
+      "title": "Device Brand / Model",
+      "type": 0,
+      "options": [],
+      "isSection": false
+    },
+    {
+      "idx": 6,
+      "id": 39584307,
+      "title": "Biomed Number",
+      "type": 2,
+      "options": [
+        "No Biomed Number"
+      ],
+      "isSection": false
+    },
+    {
+      "idx": 7,
+      "id": 431752781,
+      "title": "Device Status",
+      "type": 2,
+      "options": [
+        "New",
+        "Old Used Returned from patient"
+      ],
+      "isSection": false
+    },
+    {
+      "idx": 8,
+      "id": 594372158,
+      "title": "Last date of service",
+      "type": 9,
+      "options": [],
+      "isSection": false
+    },
+    {
+      "idx": 9,
+      "id": 673990070,
+      "title": "Device Status description",
+      "type": 2,
+      "options": [
+        "Under maintenance",
+        "Damaged",
+        "Missing accessory",
+        "Waiting for Biomed check",
+        "Ready to use"
+      ],
+      "isSection": false
+    },
+    {
+      "idx": 10,
+      "id": 2050132154,
+      "title": "Where is the device",
+      "type": 2,
+      "options": [
+        "Issued to patient",
+        "Sent to Biomed",
+        "Sent to company",
+        "With Home Ventilation Nurse",
+        "With RT",
+        "With Doctor",
+        "Returned to social worker",
+        "Discarded / Condemned"
+      ],
+      "isSection": false
+    },
+    {
+      "idx": 11,
+      "id": 95964904,
+      "title": "PPE Item",
+      "type": 8,
+      "options": [],
+      "isSection": true
+    },
+    {
+      "idx": 12,
+      "id": 434275021,
+      "title": "Selected item PPE",
+      "type": 3,
+      "options": [
+        "Option 1"
+      ],
+      "isSection": false
+    },
+    {
+      "idx": 13,
+      "id": 1209433299,
+      "title": "Airway Items",
+      "type": 8,
+      "options": [],
+      "isSection": true
+    },
+    {
+      "idx": 14,
+      "id": 102080347,
+      "title": "Selected item Airway",
+      "type": 3,
+      "options": [
+        "Tracheostomy",
+        "ET",
+        "Swedish Nose"
+      ],
+      "isSection": false
+    },
+    {
+      "idx": 15,
+      "id": 787055624,
+      "title": "Select item of Tracheostomy",
+      "type": 8,
+      "options": [],
+      "isSection": true
+    },
+    {
+      "idx": 16,
+      "id": 1048583822,
+      "title": "Select item of Tracheostomy",
+      "type": 2,
+      "options": [
+        "Accessory",
+        "Tracheostomy Tube"
+      ],
+      "isSection": false
+    },
+    {
+      "idx": 17,
+      "id": 1063397915,
+      "title": "Type of the Tracheostomy",
+      "type": 8,
+      "options": [],
+      "isSection": true
+    },
+    {
+      "idx": 18,
+      "id": 104505,
+      "title": "Type of the Tracheostomy",
+      "type": 2,
+      "options": [
+        "Neonate",
+        "Pediatric"
+      ],
+      "isSection": false
+    },
+    {
+      "idx": 19,
+      "id": 657201775,
+      "title": "What is the tracheostomy tube type?",
+      "type": 2,
+      "options": [
+        "Cuffed",
+        "Uncuffed"
+      ],
+      "isSection": false
+    },
+    {
+      "idx": 20,
+      "id": 1972695285,
+      "title": "What is the tracheostomy tube size",
+      "type": 3,
+      "options": [
+        "2.5",
+        "3",
+        "3.5",
+        "4",
+        "4.5",
+        "5",
+        "5.5",
+        "6"
+      ],
+      "isSection": false
+    },
+    {
+      "idx": 21,
+      "id": 2033116529,
+      "title": "where",
+      "type": 2,
+      "options": [
+        "Office Store",
+        "PW1",
+        "PW2",
+        "PW3",
+        "PW4",
+        "Pead Onco",
+        "PICU",
+        "PER",
+        "PHDU"
+      ],
+      "isSection": false
+    },
+    {
+      "idx": 22,
+      "id": 1858505554,
+      "title": "Accessory for Tracheostomy",
+      "type": 8,
+      "options": [],
+      "isSection": true
+    },
+    {
+      "idx": 23,
+      "id": 1390926562,
+      "title": "Accessory for Tracheostomy",
+      "type": 2,
+      "options": [
+        "Tracheostomy Polymem Dressing",
+        "Tracheostomy Tie",
+        "Swedish Nose"
+      ],
+      "isSection": false
+    },
+    {
+      "idx": 24,
+      "id": 1897420450,
+      "title": "Hygienic Items",
+      "type": 8,
+      "options": [],
+      "isSection": true
+    },
+    {
+      "idx": 25,
+      "id": 1994467842,
+      "title": "Selected item  Hygienic Items",
+      "type": 2,
+      "options": [
+        "Option 1"
+      ],
+      "isSection": false
+    },
+    {
+      "idx": 26,
+      "id": 119700726,
+      "title": "Procedure Items",
+      "type": 8,
+      "options": [],
+      "isSection": true
+    },
+    {
+      "idx": 27,
+      "id": 1838614227,
+      "title": "Selected item  Procedure Items",
+      "type": 2,
+      "options": [
+        "Option 1"
+      ],
+      "isSection": false
+    },
+    {
+      "idx": 28,
+      "id": 1603428471,
+      "title": "Patient Care",
+      "type": 8,
+      "options": [],
+      "isSection": true
+    },
+    {
+      "idx": 29,
+      "id": 1653770132,
+      "title": "Selected item  Patient Care",
+      "type": 3,
+      "options": [
+        "Masimo Saturation Probe Infant",
+        "Masimo Saturation Probe Pediatric",
+        "Disposable Electrode Neonatal",
+        "Disposable Electrode Pediatric"
+      ],
+      "isSection": false
+    },
+    {
+      "idx": 30,
+      "id": 1003112015,
+      "title": "Item Movement (Received or Consumed)",
+      "type": 8,
+      "options": [],
+      "isSection": true
+    },
+    {
+      "idx": 31,
+      "id": 449930029,
+      "title": "Was the item received or consumed?",
+      "type": 3,
+      "options": [
+        "Received stock",
+        "Consumed",
+        "Not available"
+      ],
+      "isSection": false
+    },
+    {
+      "idx": 32,
+      "id": 1625375153,
+      "title": "Receiving Status",
+      "type": 8,
+      "options": [],
+      "isSection": true
+    },
+    {
+      "idx": 33,
+      "id": 1865189735,
+      "title": "How was the item added to the store stock?",
+      "type": 3,
+      "options": [
+        "Indented from RH store",
+        "Barrowed from other Hospital",
+        "Barrowed from other wards",
+        "Return as item not used for patient"
+      ],
+      "isSection": false
+    },
+    {
+      "idx": 34,
+      "id": 1208110510,
+      "title": "Indent Number",
+      "type": 0,
+      "options": [],
+      "isSection": false
+    },
+    {
+      "idx": 35,
+      "id": 594948644,
+      "title": "Consumed",
+      "type": 8,
+      "options": [],
+      "isSection": true
+    },
+    {
+      "idx": 36,
+      "id": 771656145,
+      "title": "How was the item consumed?",
+      "type": 2,
+      "options": [
+        "Used for pt",
+        "given to another ward",
+        "given to another hospital",
+        "Removed as expired",
+        "Return to store"
+      ],
+      "isSection": false
+    },
+    {
+      "idx": 37,
+      "id": 1289784202,
+      "title": "counting the stock",
+      "type": 8,
+      "options": [],
+      "isSection": true
+    },
+    {
+      "idx": 38,
+      "id": 918295110,
+      "title": "Number of items consumed/ added to the stock?",
+      "type": 0,
+      "options": [],
+      "isSection": false
+    },
+    {
+      "idx": 39,
+      "id": 2015477198,
+      "title": "Expiry Date",
+      "type": 9,
+      "options": [],
+      "isSection": false
+    },
+    {
+      "idx": 40,
+      "id": 1966976184,
+      "title": "Item not available",
+      "type": 8,
+      "options": [],
+      "isSection": true
+    },
+    {
+      "idx": 41,
+      "id": 40740471,
+      "title": "Incident number",
+      "type": 0,
+      "options": [],
+      "isSection": false
+    },
+    {
+      "idx": 42,
+      "id": 1086225804,
+      "title": "Barwa number",
+      "type": 0,
+      "options": [],
+      "isSection": false
+    }
+  ]
+}
