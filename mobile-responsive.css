@@ -1,0 +1,1036 @@
+/* PediVent — full mobile responsive layer (index, DashBoard, admin) */
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+.page {
+  overflow-x: hidden;
+}
+
+@media (max-width: 1180px) {
+  .page {
+    overflow: visible !important;
+    min-height: 100vh;
+  }
+
+  .page-section,
+  .entry-wizard-overlay {
+    zoom: 1 !important;
+  }
+}
+
+img,
+canvas,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+.mobile-nav-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.mobile-nav-toggle:active {
+  transform: scale(0.96);
+}
+
+body.nav-menu-open {
+  overflow: hidden;
+}
+
+@media (max-width: 1180px) {
+  .navbar {
+    position: fixed !important;
+    top: max(8px, env(safe-area-inset-top)) !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: calc(100% - 16px) !important;
+    max-width: 100% !important;
+    grid-template-columns: 1fr auto auto !important;
+    grid-template-areas:
+      "brand toggle actions-compact"
+      "menu menu menu";
+    align-items: center;
+    gap: 10px !important;
+    padding: 10px 12px !important;
+    border-radius: 20px !important;
+    z-index: 120 !important;
+  }
+
+  .navbar .brand {
+    grid-area: brand;
+    justify-self: start;
+    min-width: 0;
+  }
+
+  .navbar .brand h2 {
+    font-size: 18px !important;
+  }
+
+  .navbar .brand span {
+    font-size: 11px !important;
+    letter-spacing: 1px !important;
+  }
+
+  .navbar .logo {
+    width: 44px !important;
+    height: 44px !important;
+    font-size: 12px !important;
+    border-radius: 14px !important;
+  }
+
+  .mobile-nav-toggle {
+    display: inline-flex;
+    grid-area: toggle;
+    justify-self: end;
+  }
+
+  .navbar .nav-actions {
+    grid-area: actions-compact;
+    justify-self: end;
+    flex-wrap: nowrap !important;
+    gap: 6px !important;
+  }
+
+  .navbar.nav-open {
+    grid-template-areas:
+      "brand toggle ."
+      "menu menu menu";
+  }
+
+  .navbar.nav-open .nav-actions {
+    grid-area: menu;
+    justify-self: stretch;
+    flex-wrap: wrap !important;
+    padding-bottom: 6px;
+  }
+
+  .navbar.nav-open .nav-actions .user-nav-pill,
+  .navbar.nav-open .nav-actions .user-nav-text,
+  .navbar.nav-open .nav-actions .user-nav-text small {
+    display: flex;
+  }
+
+  .navbar.nav-open .nav-actions .user-nav-text small {
+    display: block;
+  }
+
+  .navbar:not(.nav-open) .nav-actions .user-nav-pill,
+  .navbar:not(.nav-open) .nav-actions .user-nav-text {
+    display: none !important;
+  }
+
+  .navbar .nav-actions .entry-add-btn,
+  .navbar .nav-actions .user-signout-btn,
+  .navbar .nav-actions .admin-login-btn,
+  .navbar .nav-actions .status-pill {
+    min-height: 40px;
+    height: 40px;
+    padding: 0 12px !important;
+    font-size: 12px !important;
+    white-space: nowrap;
+  }
+
+  .navbar .nav-links {
+    grid-area: menu;
+    display: none !important;
+    flex-direction: column;
+    width: 100% !important;
+    overflow: visible !important;
+    gap: 6px !important;
+    padding: 8px 0 4px;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    margin-top: 2px;
+  }
+
+  .navbar.nav-open .nav-links {
+    display: flex !important;
+  }
+
+  .navbar .nav-links a {
+    width: 100%;
+    text-align: center;
+    padding: 12px 14px !important;
+    font-size: 14px !important;
+    border-radius: 12px !important;
+  }
+
+  /* Landing page layout — reset desktop negative offsets */
+  .showcase {
+    margin-top: 0 !important;
+    gap: 14px !important;
+  }
+
+  .info-card.left,
+  .info-card.right {
+    margin: 0 !important;
+    width: 100% !important;
+    justify-self: stretch !important;
+    min-height: auto !important;
+  }
+
+  .center-visual {
+    margin: 0 !important;
+    order: -1;
+    min-height: 220px !important;
+  }
+
+  .main-img {
+    width: min(320px, 92vw) !important;
+    max-height: 260px !important;
+  }
+
+  .hero {
+    padding: 92px 12px 28px !important;
+    gap: 18px !important;
+    min-height: auto !important;
+  }
+
+  .hero-header {
+    text-align: center;
+  }
+
+  .features {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .bottom-panel {
+    padding: 18px 14px !important;
+    margin-bottom: 0 !important;
+  }
+
+  .signup-notice-overlay {
+    padding: 12px !important;
+    align-items: center !important;
+  }
+  section.hero.page-section,
+  .hero.page-section,
+  .reports-page.hero {
+    min-height: auto !important;
+    padding: 88px 12px 24px !important;
+    display: block !important;
+    gap: 0 !important;
+  }
+
+  .hero.page-section .hero-header {
+    margin-bottom: 12px;
+  }
+
+  .hero-title {
+    font-size: clamp(28px, 8vw, 42px) !important;
+    letter-spacing: -1px !important;
+    line-height: 1.05 !important;
+  }
+
+  .hero-subtitle,
+  .features {
+    font-size: 13px !important;
+  }
+
+  .dashboard-content,
+  .reports-content {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 0 24px !important;
+    margin-top: 0 !important;
+  }
+
+  .reports-panel {
+    padding: 16px 14px 18px !important;
+    border-radius: 18px !important;
+  }
+
+  .report-toolbar,
+  .report-toolbar-actions {
+    flex-direction: column;
+    align-items: stretch !important;
+    gap: 10px !important;
+  }
+
+  .report-toolbar-actions {
+    width: 100%;
+  }
+
+  .report-export-btn,
+  .report-refresh-btn {
+    width: 100%;
+    justify-content: center;
+    min-height: 44px;
+  }
+
+  .report-summary,
+  .dash-summary-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+  }
+
+  .report-kpi,
+  .dash-summary-card {
+    padding: 12px !important;
+  }
+
+  .report-kpi strong,
+  .dash-summary-card strong {
+    font-size: 18px !important;
+  }
+
+  .dash-filters,
+  .report-filter-row {
+    flex-direction: column;
+    gap: 10px !important;
+  }
+
+  .dash-filter-group,
+  .report-filter-group {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .dash-filter-select,
+  .dash-filter-search,
+  .report-filter-select {
+    min-height: 44px;
+    font-size: 16px !important;
+  }
+
+  .dash-filter-reset {
+    width: 100%;
+    min-height: 44px;
+  }
+
+  .dashboard-charts-grid,
+  .dashboard-charts-grid.three {
+    grid-template-columns: 1fr !important;
+  }
+
+  .dashboard-card,
+  .chart-card {
+    padding: 14px 12px !important;
+    border-radius: 16px !important;
+  }
+
+  .dashboard-card h3,
+  .dash-section-title {
+    font-size: 14px !important;
+  }
+
+  .dash-table-scroll,
+  .report-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 0 -2px;
+  }
+
+  .dash-data-table,
+  .report-table,
+  .dashboard-recent-table {
+    min-width: 640px;
+    font-size: 12px !important;
+  }
+
+  .dash-data-table th,
+  .dash-data-table td,
+  .report-table th,
+  .report-table td {
+    padding: 8px 10px !important;
+  }
+
+  .dashboard-actions {
+    flex-direction: column;
+    gap: 10px !important;
+  }
+
+  .dashboard-action-btn {
+    width: 100%;
+    min-height: 44px;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .trach-dash-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+  }
+
+  .trach-tube-card-head h4 {
+    font-size: 11px !important;
+  }
+
+  .trach-dash-page-title {
+    font-size: clamp(22px, 6vw, 32px) !important;
+  }
+
+  .chart-wrap,
+  .chart-wrap.tall,
+  .chart-wrap.trend {
+    height: 240px !important;
+    min-height: 200px;
+  }
+
+  .trach-trend-stats,
+  .chart-mini-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .trach-dash-capture-area {
+    padding: 14px 12px 16px !important;
+  }
+
+  .showcase {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  .info-card,
+  .center-visual,
+  .bottom-panel {
+    width: 100% !important;
+  }
+
+  .equipment-row {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 10px !important;
+  }
+
+  .buttons {
+    flex-direction: column;
+    align-items: stretch !important;
+  }
+
+  .green-btn {
+    width: 100%;
+    min-height: 44px;
+  }
+
+  .app-copyright {
+    padding: 16px 12px 28px !important;
+    font-size: 10px !important;
+  }
+
+  /* Login popup — full screen on phone */
+  .popup-overlay {
+    padding: 0 !important;
+    align-items: stretch !important;
+  }
+
+  .popup-content {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 100% !important;
+    max-height: 100% !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+  }
+
+  .login-wrapper {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 100% !important;
+    min-height: 100% !important;
+    border-radius: 0 !important;
+  }
+
+  .form-container {
+    padding: 24px 18px !important;
+  }
+
+  .form-container h1 {
+    font-size: 24px !important;
+  }
+
+  .input-group input,
+  .input-group select,
+  .main-btn {
+    min-height: 48px;
+    font-size: 16px !important;
+  }
+
+  .close-btn {
+    top: 10px !important;
+    right: 10px !important;
+    width: 44px !important;
+    height: 44px !important;
+  }
+
+  .signup-notice-box {
+    width: calc(100% - 24px) !important;
+    max-width: 100% !important;
+    padding: 24px 18px !important;
+  }
+
+  .change-password-box {
+    width: calc(100% - 24px) !important;
+    padding: 24px 18px !important;
+  }
+
+  .change-password-overlay {
+    padding: 12px !important;
+    align-items: center !important;
+  }
+
+  .toggle-panel h1 {
+    font-size: clamp(22px, 6vw, 28px) !important;
+  }
+
+  /* Entry wizard */
+  .entry-wizard-overlay {
+    padding: 0 !important;
+    align-items: stretch !important;
+  }
+
+  .entry-wizard-box {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 100vh !important;
+    max-height: 100vh !important;
+    border-radius: 0 !important;
+  }
+
+  .entry-wizard-main {
+    padding: 14px 14px 0 !important;
+  }
+
+  .entry-wizard-body {
+    max-height: calc(100vh - 210px) !important;
+    padding-right: 4px;
+  }
+
+  .entry-wizard-foot {
+    padding: 12px 14px calc(12px + env(safe-area-inset-bottom)) !important;
+    flex-direction: column-reverse;
+    gap: 8px !important;
+  }
+
+  .entry-wizard-foot button {
+    width: 100%;
+    min-height: 46px;
+  }
+
+  .entry-choice-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Admin panel */
+  body {
+    padding: 10px !important;
+  }
+
+  .dashboard-shell {
+    width: 100% !important;
+    min-height: auto !important;
+    border-radius: 18px !important;
+    grid-template-columns: 1fr !important;
+  }
+
+  .profile-panel {
+    display: none !important;
+  }
+
+  .topbar {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 12px !important;
+  }
+
+  .search-box {
+    width: 100% !important;
+  }
+
+  .action-row {
+    flex-direction: column !important;
+    width: 100%;
+  }
+
+  .action-row button {
+    width: 100%;
+    min-height: 44px;
+  }
+
+  .main-area {
+    padding: 16px 14px !important;
+  }
+
+  .title h1 {
+    font-size: 22px !important;
+    line-height: 1.2 !important;
+  }
+
+  .title p {
+    font-size: 13px !important;
+  }
+
+  .toolbar,
+  .filters {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 10px !important;
+  }
+
+  .filters select,
+  .search-box input {
+    min-height: 44px;
+    font-size: 16px !important;
+  }
+
+  .summary-kpis,
+  .card-board,
+  .team-profile-board {
+    grid-template-columns: 1fr !important;
+  }
+
+  .record-actions,
+  .team-profile-actions,
+  .form-actions,
+  .signup-notice-actions {
+    flex-direction: column !important;
+  }
+
+  .record-actions button,
+  .team-profile-btn,
+  .form-actions button,
+  .mini-btn,
+  .secondary-btn,
+  .edit-profile {
+    width: 100%;
+    min-height: 44px;
+  }
+
+  .modal-box {
+    width: calc(100% - 20px) !important;
+    max-height: calc(100vh - 24px);
+    overflow: auto;
+  }
+
+  .form-grid,
+  .record-meta,
+  .reset-password-grid,
+  .team-profile-info {
+    grid-template-columns: 1fr !important;
+  }
+
+  .icon-sidebar {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    border-bottom: 1px solid #dbe7f5;
+  }
+
+  .side-btn {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  /* Override inline layout conflicts from HTML stylesheets */
+  .navbar .brand,
+  .navbar .nav-actions {
+    justify-content: flex-start !important;
+  }
+
+  .vent-img,
+  .trach-img {
+    display: none !important;
+  }
+
+  .divider {
+    width: min(280px, 72vw) !important;
+  }
+
+  .card-btn,
+  .right .card-btn {
+    width: 100% !important;
+    justify-content: center;
+    min-height: 44px;
+  }
+
+  .mini-item {
+    grid-template-columns: 36px 1fr !important;
+    gap: 12px !important;
+  }
+
+  .mini-item h4 {
+    font-size: 14px !important;
+  }
+
+  .mini-item p {
+    font-size: 12px !important;
+  }
+
+  .report-data-status {
+    width: 100%;
+    font-size: 12px !important;
+    line-height: 1.45;
+    text-align: center;
+  }
+
+  .report-toolbar {
+    gap: 12px !important;
+  }
+
+  .dashboard-cat-item {
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 6px !important;
+  }
+
+  .dashboard-action-btn.primary {
+    width: 100%;
+  }
+
+  /* Compact status on index navbar */
+  .navbar .status-pill {
+    font-size: 0 !important;
+    gap: 0 !important;
+    padding: 0 11px !important;
+    min-width: 40px;
+  }
+
+  .navbar .status-pill .status-dot {
+    width: 12px;
+    height: 12px;
+  }
+
+  /* Scrollable tables with sticky first column */
+  .dash-table-scroll,
+  .report-table-wrap {
+    position: relative;
+    border-radius: 14px;
+    box-shadow: inset -12px 0 12px -12px rgba(15, 61, 115, 0.12);
+  }
+
+  .dash-data-table th:first-child,
+  .dash-data-table td:first-child,
+  .report-table th:first-child,
+  .report-table td:first-child,
+  .dashboard-recent-table th:first-child,
+  .dashboard-recent-table td:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 2;
+    background: #fff;
+    box-shadow: 2px 0 8px rgba(15, 61, 115, 0.08);
+  }
+
+  .dash-data-table th:first-child,
+  .report-table th:first-child,
+  .dashboard-recent-table th:first-child {
+    background: #f0f6ff;
+    z-index: 3;
+  }
+
+  .dash-data-table,
+  .report-table,
+  .dashboard-recent-table {
+    min-width: 560px;
+  }
+
+  /* Entry wizard — phone-first */
+  .entry-wizard-box,
+  .login-wrapper,
+  .popup-content {
+    height: 100dvh !important;
+    max-height: 100dvh !important;
+  }
+
+  .entry-wizard-body {
+    max-height: calc(100dvh - 220px) !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
+
+  .entry-wizard-head h2 {
+    font-size: clamp(18px, 5vw, 24px) !important;
+    padding-right: 44px;
+    line-height: 1.25 !important;
+  }
+
+  .entry-wizard-progress {
+    padding: 10px 14px !important;
+  }
+
+  .entry-step-panel-head,
+  .entry-step-panel-body {
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+  }
+
+  .entry-step-panel-head h3 {
+    font-size: 15px !important;
+  }
+
+  .entry-field input,
+  .entry-field select,
+  .entry-field textarea,
+  .entry-select,
+  .entry-input {
+    min-height: 48px;
+    font-size: 16px !important;
+  }
+
+  .entry-choice-card {
+    min-height: 52px;
+    padding: 12px 12px 12px 40px !important;
+    font-size: 14px !important;
+  }
+
+  .entry-review-row {
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 4px !important;
+  }
+
+  .entry-review-row strong {
+    word-break: break-word;
+  }
+
+  .entry-submit-status {
+    margin: 0 14px 14px !important;
+  }
+
+  .entry-wizard-foot {
+    position: sticky;
+    bottom: 0;
+    z-index: 5;
+    box-shadow: 0 -8px 24px rgba(94, 53, 177, 0.08);
+  }
+
+  /* Login — stacked layout for phones (overrides slide animation) */
+  .login-wrapper {
+    display: flex !important;
+    flex-direction: column !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .toggle-container {
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 150px;
+    border-radius: 0 0 40px 40px !important;
+    flex-shrink: 0;
+    order: -1;
+  }
+
+  .toggle,
+  .login-wrapper.active .toggle {
+    position: relative !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    transform: none !important;
+  }
+
+  .toggle-panel {
+    position: relative !important;
+    width: 100% !important;
+    height: auto !important;
+    padding: 22px 16px !important;
+  }
+
+  .toggle-left,
+  .toggle-right,
+  .login-wrapper.active .toggle-left,
+  .login-wrapper.active .toggle-right {
+    transform: none !important;
+  }
+
+  .toggle-right {
+    display: none !important;
+  }
+
+  .login-wrapper.active .toggle-left {
+    display: none !important;
+  }
+
+  .login-wrapper.active .toggle-right {
+    display: flex !important;
+  }
+
+  .form-container {
+    position: relative !important;
+    width: 100% !important;
+    height: auto !important;
+    top: auto !important;
+    left: 0 !important;
+    transform: none !important;
+    opacity: 1 !important;
+    flex: 1 1 auto;
+    padding: 28px 18px calc(24px + env(safe-area-inset-bottom)) !important;
+  }
+
+  .sign-up {
+    display: none !important;
+  }
+
+  .sign-in {
+    display: flex !important;
+  }
+
+  .login-wrapper.active .sign-in {
+    display: none !important;
+  }
+
+  .login-wrapper.active .sign-up {
+    display: flex !important;
+  }
+
+  .record-card {
+    padding: 16px !important;
+  }
+
+  .summary-kpi {
+    padding: 14px !important;
+  }
+
+  .app-copyright {
+    padding-bottom: calc(28px + env(safe-area-inset-bottom)) !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .navbar {
+    grid-template-columns: 1fr auto !important;
+    grid-template-areas:
+      "brand toggle"
+      "actions-compact actions-compact"
+      "menu menu menu";
+    gap: 8px !important;
+  }
+
+  .navbar.nav-open {
+    grid-template-areas:
+      "brand toggle"
+      "menu menu menu";
+  }
+
+  .navbar:not(.nav-open) .nav-actions {
+    grid-area: actions-compact;
+    width: 100%;
+    justify-content: stretch !important;
+    gap: 8px !important;
+  }
+
+  .navbar:not(.nav-open) .nav-actions .entry-add-btn,
+  .navbar:not(.nav-open) .nav-actions .user-signout-btn,
+  .navbar:not(.nav-open) .nav-actions .admin-login-btn {
+    flex: 1 1 0;
+    justify-content: center;
+    min-height: 44px;
+    height: 44px;
+  }
+
+  .navbar .brand h2 {
+    font-size: 16px !important;
+  }
+
+  .navbar .brand span {
+    font-size: 10px !important;
+  }
+
+  .navbar .logo {
+    width: 40px !important;
+    height: 40px !important;
+  }
+
+  .hero-title {
+    font-size: clamp(26px, 9vw, 36px) !important;
+  }
+
+  .reports-panel {
+    padding: 14px 12px 16px !important;
+  }
+
+  .dash-data-table,
+  .report-table,
+  .dashboard-recent-table {
+    min-width: 480px;
+    font-size: 11px !important;
+  }
+
+  .chart-wrap,
+  .chart-wrap.tall,
+  .chart-wrap.trend {
+    height: 220px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .report-summary,
+  .dash-summary-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .trach-dash-row {
+    grid-template-columns: 1fr !important;
+  }
+
+  .trach-trend-stats,
+  .chart-mini-stats {
+    grid-template-columns: 1fr !important;
+  }
+
+  .equipment-row {
+    grid-template-columns: 1fr !important;
+  }
+
+  .rolePreview {
+    grid-template-columns: 1fr !important;
+  }
+
+  .navbar .nav-actions .entry-add-btn {
+    font-size: 11px !important;
+    padding: 0 8px !important;
+  }
+
+  .navbar .nav-actions .user-signout-btn {
+    font-size: 11px !important;
+  }
+
+  .admin-login-btn {
+    font-size: 11px !important;
+    padding: 0 10px !important;
+  }
+
+  .hero {
+    padding: 86px 10px 24px !important;
+  }
+
+  section.hero.page-section,
+  .hero.page-section,
+  .reports-page.hero {
+    padding: 84px 10px 20px !important;
+  }
+
+  .info-card {
+    padding: 18px 16px !important;
+    border-radius: 18px !important;
+  }
+
+  .entry-choice-grid--categories {
+    grid-template-columns: 1fr !important;
+  }
+}
