@@ -263,14 +263,14 @@
     }
 
     .hero-title {
-      font-size: clamp(40px, 3vw, 60px);
+      font-size: clamp(28px, 2.1vw, 42px);
       line-height: 0.93;
       font-weight: 900;
-      letter-spacing: -3px;
+      letter-spacing: -1.8px;
       color: #ffffff;
       text-shadow: 0 10px 28px rgba(0,0,0,0.35);
-      margin-bottom: 20px;
-      margin-top: 1rem;
+      margin-bottom: 12px;
+      margin-top: 0.75rem;
     }
 
     .divider {
@@ -358,7 +358,7 @@
   width: 100%; margin-top: 6rem;
   max-width: 1740px;
   display: grid;
-  grid-template-columns: 300px minmax(460px, 1fr) 420px;
+  grid-template-columns: 280px minmax(440px, 1fr) 390px;
   align-items: start;
 }
 
@@ -367,14 +367,16 @@
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  margin-top: -8rem; margin-right: -7rem;
+  margin-top: -8rem;
+  margin-right: -4.5rem;
 }
 
     .main-img {
-      width: min(500px, 100%);
-      max-height: 330px;
+      width: min(440px, 100%);
+      max-height: 285px;
       object-fit: contain;
       filter: drop-shadow(0 35px 42px rgba(0,0,0,0.48));
+      transform: translateX(-22px);
       z-index: 3;
     }
 
@@ -401,14 +403,14 @@
 
 .info-card.left {
   justify-self: start;
-  margin-top: -17rem;
-  margin-left: -1rem; width: 120%;
+  margin-top: -15rem;
+  margin-left: -1rem; width: 105%;
 }
 
 .info-card.right {
   justify-self: end;
-  width: 90% !important;
-  margin-top: -10rem;
+  width: 82% !important;
+  margin-top: -8rem;
   margin-right: -1rem !important;
 }
 
@@ -519,6 +521,80 @@
       filter: brightness(1.08);
     }
 
+    /* Desktop / tablet — compact info-card internals */
+    @media (min-width: 1181px) {
+      .info-card.left,
+      .info-card.right {
+        margin-top: -14rem !important;
+      }
+
+      .info-card {
+        min-height: 255px;
+        padding: 14px 15px;
+        border-radius: 20px;
+      }
+
+      .info-card .card-title-row {
+        grid-template-columns: 34px 1fr;
+        gap: 10px;
+        margin-bottom: 10px;
+      }
+
+      .info-card .card-main-icon,
+      .info-card .mini-icon {
+        width: 26px;
+        height: 26px;
+        border-radius: 11px;
+      }
+
+      .info-card .card-main-icon img,
+      .info-card .mini-icon img {
+        width: 30px;
+        height: 30px;
+        margin-top: -0.25rem;
+      }
+
+      .info-card .card-title-row h3 {
+        font-size: 12px;
+        margin-bottom: 3px;
+      }
+
+      .info-card .card-title-row p {
+        font-size: 11px;
+      }
+
+      .info-card .mini-list {
+        gap: 11px;
+      }
+
+      .info-card .mini-item {
+        grid-template-columns: 32px 1fr;
+        gap: 10px;
+      }
+
+      .info-card .mini-item h4 {
+        font-size: 12px;
+        margin-bottom: 2px;
+      }
+
+      .info-card .mini-item p {
+        font-size: 11px;
+        line-height: 1.28;
+      }
+
+      .info-card .card-btn {
+        height: 40px;
+        margin-top: 13px;
+        font-size: 13px;
+        gap: 8px;
+        border-radius: 10px;
+      }
+
+      .info-card.right .card-title-row {
+        grid-template-columns: 34px minmax(0, 1fr);
+      }
+    }
+
     .side-img {
       position: absolute;
       pointer-events: none;
@@ -565,13 +641,13 @@
       z-index: 4;
       width: min(2260px, 100%);
       margin: 0 auto 0;
-      padding: 22px 34px;
-      border-radius: 22px;
-      margin-top: -2rem;
+      padding: 15px 24px;
+      border-radius: 16px;
+      margin-top: -7.5rem;
       display: grid;
       grid-template-columns: 1.2fr 2fr;
       align-items: center;
-      gap: 30px;
+      gap: 18px;
 
       background: linear-gradient(
         135deg,
@@ -586,37 +662,37 @@
     }
 
     .bottom-text h3 {
-      font-size: 18px;
+      font-size: 14px;
       font-weight: 900;
       color: #ffffff;
-      margin-bottom: 8px;
+      margin-bottom: 5px;
     }
 
     .bottom-text p {
       color: rgba(255,255,255,0.66);
-      font-size: 13px;
-      line-height: 1.45;
+      font-size: 11px;
+      line-height: 1.35;
       font-weight: 600;
     }
 
     .equipment-row {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
-      gap: 18px;
+      gap: 11px;
       align-items: center;
     }
 
     .equipment-item {
       text-align: center;
       color: rgba(255,255,255,0.85);
-      font-size: 13px;
+      font-size: 11px;
       font-weight: 700;
     }
 
     .equipment-item .eq-icon {
       display: block;
-      margin-bottom: 8px;
-      font-size: 32px;
+      margin-bottom: 5px;
+      font-size: 24px;
       line-height: 1;
       color: #d8fff8;
       text-shadow: 0 0 14px rgba(105,255,232,0.48);
@@ -630,7 +706,7 @@
       }
 
       .showcase {
-        grid-template-columns: 330px minmax(420px, 1fr) 380px;
+        grid-template-columns: 300px minmax(400px, 1fr) 350px;
         gap: 18px;
       }
 
@@ -639,7 +715,8 @@
       }
 
       .main-img {
-        width: min(560px, 100%);
+        width: min(480px, 100%);
+        max-height: 275px;
       }
 
       .vent-img {
@@ -766,7 +843,7 @@
       }
 
       .hero-title {
-        font-size: clamp(38px, 12vw, 56px);
+        font-size: clamp(26px, 9vw, 38px);
         letter-spacing: -1.5px;
       }
 
@@ -820,7 +897,7 @@
       }
 
       .hero-title {
-        font-size: 38px;
+        font-size: 26px;
       }
 
       .hero-subtitle {
@@ -862,8 +939,8 @@
 
     .info-card.right {
   justify-self: end;
-  width: 80%;
-  margin-top: -17rem;
+  width: 72%;
+  margin-top: -15rem;
   margin-right: -1rem;
 }
 
@@ -887,16 +964,16 @@
 }
 
 .equipment-item .eq-icon {
-  width: 54px;
-  height: 54px;
-  margin: 0 auto 8px;
+  width: 40px;
+  height: 40px;
+  margin: 0 auto 5px;
   display: grid;
   place-items: center;
 }
 
 .equipment-item .eq-icon img {
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   object-fit: contain;
   display: block; margin-top: -0.5rem; margin-left: -1REM;
   filter: drop-shadow(0 8px 14px rgba(0,0,0,0.25));
@@ -2097,13 +2174,13 @@
             <div class="toggle-panel toggle-left">
               <h1>Welcome Back!</h1>
               <p>Already have access? Sign in and continue inventory management.</p>
-              <button class="ghost-btn" id="login" type="button">SIGN IN</button>
+              <button class="ghost-btn" id="login" type="button">Sign In</button>
             </div>
 
             <div class="toggle-panel toggle-right">
               <h1>Hello, Team!</h1>
               <p>Request access to manage pediatric home ventilation equipment and stock.</p>
-              <button class="ghost-btn" id="register" type="button">SIGN UP</button>
+              <button class="ghost-btn" id="register" type="button">Create Account</button>
             </div>
 
           </div>
@@ -2312,6 +2389,15 @@ function ensureDefaultAdminExists(){
 
     function openAdminLogin(event){
       if(event) event.preventDefault();
+      document.querySelectorAll('.navbar').forEach(function(nav){
+        nav.classList.remove('nav-open');
+        var toggle = nav.querySelector('.mobile-nav-toggle');
+        if(toggle){
+          toggle.setAttribute('aria-expanded', 'false');
+          toggle.setAttribute('aria-label', 'Open menu');
+        }
+      });
+      document.body.classList.remove('nav-menu-open');
       ensureDefaultAdminExists();
       container.classList.remove('active');
       clearMessages();
