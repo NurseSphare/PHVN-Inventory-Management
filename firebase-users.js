@@ -214,78 +214,74 @@ function isProtectedAdmin(user){
     await auth.signOut();
     return profile;
   }
-
 async function signInAccount(identifier, password, role){
-  let profile = await findProfileByIdentifier(identifier);
   const loginIdentifier = String(identifier || '').trim().toLowerCase();
-  let authEmail = profile ? profile.authEmail : toAuthEmail(identifier);
-
-  if(!profile && role === 'Admin' && (
+  const isProtectedAdminLogin = role === 'Admin' && (
     loginIdentifier === PROTECTED_ADMIN_USERNAME.toLowerCase() ||
     loginIdentifier === PROTECTED_ADMIN_EMAIL.toLowerCase()
-  )){
-    authEmail = PROTECTED_ADMIN_EMAIL;
-  }
+  );
 
-    if(profile && profile.status === 'pending'){
-      try{
-        await auth.signInWithEmailAndPassword(authEmail, password);
-      }catch(error){
-        throw new Error('Incorrect username, password, or role.');
-      }
-      await auth.signOut();
-      throw new Error('Your account is pending admin approval.');
-    }
+  let profile = null;
+  let authEmail = isProtectedAdminLogin ? PROTECTED_ADMIN_EMAIL : toAuthEmail(identifier);
 
-    if(profile && profile.status !== 'approved'){
-      throw new Error('Your account is not approved yet.');
-    }
-
-    let credential;
+  // مهم: الأدمن لا يقرأ Firestore قبل تسجيل الدخول
+  if(!isProtectedAdminLogin && !String(identifier || '').includes('@')){
     try{
-      credential = await auth.signInWithEmailAndPassword(authEmail, password);
+      profile = await findProfileByIdentifier(identifier);
+      if(profile) authEmail = profile.authEmail;
     }catch(error){
-      throw new Error('Incorrect username, password, or role.');
+      throw new Error('Please sign in using your registered email address.');
     }
-
-    let fresh = await getProfileByUid(credential.user.uid);
-    if(!fresh){
-      const loginKey = toAuthEmail(identifier);
-if(role === 'Admin' && authEmail.toLowerCase() === PROTECTED_ADMIN_EMAIL.toLowerCase()){
-  fresh = await writeProfile(credential.user.uid, {
-    name: 'Hajer',
-    username: PROTECTED_ADMIN_USERNAME,
-    email: PROTECTED_ADMIN_EMAIL,
-    authEmail: PROTECTED_ADMIN_EMAIL,
-    role: 'Admin',
-    status: 'approved',
-    mustChangePassword: false,
-    area: 'Pediatric Home Ventilation',
-    profileType: 'Inventory Team Member'
-  });
-}else{
-        await auth.signOut();
-        throw new Error('Incorrect username, password, or role.');
-      }
-    }
-
-    if(fresh.status === 'pending'){
-      await auth.signOut();
-      throw new Error('Your account is pending admin approval.');
-    }
-
-    if(fresh.status !== 'approved') throw new Error('Your account is not approved yet.');
-
-    if(fresh.role !== role){
-      await auth.signOut();
-      throw new Error('Incorrect role. Please select: ' + fresh.role);
-    }
-
-    if(fresh.mustChangePassword) return fresh;
-
-    cacheSession(fresh);
-    return fresh;
   }
+
+  let credential;
+  try{
+    credential = await auth.signInWithEmailAndPassword(authEmail, password);
+  }catch(error){
+    throw new Error('Incorrect username, password, or role.');
+  }
+
+  let fresh = await getProfileByUid(credential.user.uid);
+
+  if(!fresh && isProtectedAdminLogin){
+    fresh = await writeProfile(credential.user.uid, {
+      name: 'Hajer',
+      username: PROTECTED_ADMIN_USERNAME,
+      email: PROTECTED_ADMIN_EMAIL,
+      authEmail: PROTECTED_ADMIN_EMAIL,
+      role: 'Admin',
+      status: 'approved',
+      mustChangePassword: false,
+      area: 'Pediatric Home Ventilation',
+      profileType: 'Inventory Team Member'
+    });
+  }
+
+  if(!fresh){
+    await auth.signOut();
+    throw new Error('Account profile was not found.');
+  }
+
+  if(fresh.status === 'pending'){
+    await auth.signOut();
+    throw new Error('Your account is pending admin approval.');
+  }
+
+  if(fresh.status !== 'approved'){
+    await auth.signOut();
+    throw new Error('Your account is not approved yet.');
+  }
+
+  if(fresh.role !== role){
+    await auth.signOut();
+    throw new Error('Incorrect role. Please select: ' + fresh.role);
+  }
+
+  if(fresh.mustChangePassword) return fresh;
+
+  cacheSession(fresh);
+  return fresh;
+}
 
   async function updateCurrentPassword(newPassword){
     const user = auth.currentUser;
