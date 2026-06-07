@@ -298,32 +298,79 @@ async function signInAccount(identifier, password, role){
     clearSessionCache();
     await auth.signOut();
   }
+function waitForAuthReady(timeoutMs){
+  timeoutMs = timeoutMs || 7000;
 
-  async function requireAuthProfile(options){
-    options = options || {};
-    const user = auth.currentUser;
-    if(!user){
-      if(options.redirect !== false) global.location.href = 'index.html';
-      return null;
-    }
-    const profile = await getProfileByUid(user.uid);
-    if(!profile || profile.status !== 'approved'){
-      await signOutUser();
-      if(options.redirect !== false) global.location.href = 'index.html';
-      return null;
-    }
-    cacheSession(profile);
-    return profile;
+  if(auth.currentUser){
+    return Promise.resolve(auth.currentUser);
   }
 
-  async function requireAdminProfile(options){
-    const profile = await requireAuthProfile(options);
-    if(!profile || profile.role !== 'Admin'){
-      if(options && options.redirect !== false) global.location.href = 'index.html';
-      return null;
-    }
-    return profile;
+  return new Promise(function(resolve){
+    let settled = false;
+    let unsubscribe = null;
+
+    const timer = setTimeout(function(){
+      if(settled) return;
+      settled = true;
+      if(typeof unsubscribe === 'function') unsubscribe();
+      resolve(auth.currentUser || null);
+    }, timeoutMs);
+
+    unsubscribe = auth.onAuthStateChanged(function(user){
+      if(settled) return;
+      settled = true;
+      clearTimeout(timer);
+      if(typeof unsubscribe === 'function') unsubscribe();
+      resolve(user || null);
+    });
+  });
+}
+
+function redirectToIndex(){
+  global.location.href = 'index.html?v=30';
+}
+
+async function requireAuthProfile(options){
+  options = options || {};
+
+  const user = await waitForAuthReady(options.timeoutMs || 7000);
+
+  if(!user){
+    if(options.redirect !== false) redirectToIndex();
+    return null;
   }
+
+  const profile = await getProfileByUid(user.uid);
+
+  if(!profile || profile.status !== 'approved'){
+    await signOutUser();
+    if(options.redirect !== false) redirectToIndex();
+    return null;
+  }
+
+  if(isProtectedAdmin(profile)){
+    profile.role = 'Admin';
+    profile.status = 'approved';
+  }
+
+  cacheSession(profile);
+  return profile;
+}
+
+async function requireAdminProfile(options){
+  options = options || {};
+  const profile = await requireAuthProfile(options);
+
+  if(!profile) return null;
+
+  if(profile.role !== 'Admin'){
+    await signOutUser();
+    if(options.redirect !== false) redirectToIndex();
+    return null;
+  }
+
+  return profile;
+}
 
   async function fetchAllUsers(){
     const snap = await db.collection(USERS_COL).get();
