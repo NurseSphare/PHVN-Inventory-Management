@@ -22,7 +22,8 @@
   const USERS_COL = 'users';
   const RESET_COL = 'passwordResetRequests';
   const AUTH_DOMAIN = '@pedivent.local';
-
+const PROTECTED_ADMIN_USERNAME = 'Hajer@2007';
+const PROTECTED_ADMIN_EMAIL = 'hmssoon@gmail.com';
   function getSecondaryAuth(){
     let secondaryApp;
     try{
@@ -79,18 +80,22 @@
     return profile;
   }
 
-  function isProtectedAdmin(user){
-    if(!user || user.role !== 'Admin') return false;
-    const adminKey = 'hajer2007';
-    return [
-      user.username,
-      user.email,
-      user.authEmail,
-      user.authEmail ? user.authEmail.split('@')[0] : ''
-    ].some(function(v){
-      return String(v || '').toLowerCase() === adminKey;
-    });
-  }
+function isProtectedAdmin(user){
+  if(!user) return false;
+
+  const adminUsername = PROTECTED_ADMIN_USERNAME.toLowerCase();
+  const adminEmail = PROTECTED_ADMIN_EMAIL.toLowerCase();
+
+  return [
+    user.username,
+    user.name,
+    user.email,
+    user.authEmail
+  ].some(function(v){
+    const value = String(v || '').toLowerCase();
+    return value === adminUsername || value === adminEmail;
+  });
+}
 
   function mapAuthError(error){
     const code = String(error && error.code ? error.code : '');
@@ -210,9 +215,17 @@
     return profile;
   }
 
-  async function signInAccount(identifier, password, role){
-    let profile = await findProfileByIdentifier(identifier);
-    const authEmail = profile ? profile.authEmail : toAuthEmail(identifier);
+async function signInAccount(identifier, password, role){
+  let profile = await findProfileByIdentifier(identifier);
+  const loginIdentifier = String(identifier || '').trim().toLowerCase();
+  let authEmail = profile ? profile.authEmail : toAuthEmail(identifier);
+
+  if(!profile && role === 'Admin' && (
+    loginIdentifier === PROTECTED_ADMIN_USERNAME.toLowerCase() ||
+    loginIdentifier === PROTECTED_ADMIN_EMAIL.toLowerCase()
+  )){
+    authEmail = PROTECTED_ADMIN_EMAIL;
+  }
 
     if(profile && profile.status === 'pending'){
       try{
@@ -238,19 +251,19 @@
     let fresh = await getProfileByUid(credential.user.uid);
     if(!fresh){
       const loginKey = toAuthEmail(identifier);
-      if(loginKey === 'hajer2007@pedivent.local' && role === 'Admin'){
-        fresh = await writeProfile(credential.user.uid, {
-          name: 'Hajer',
-          username: 'Hajer2007',
-          email: 'Hajer2007',
-          authEmail: loginKey,
-          role: 'Admin',
-          status: 'approved',
-          mustChangePassword: true,
-          area: 'Pediatric Home Ventilation',
-          profileType: 'Inventory Team Member'
-        });
-      }else{
+if(role === 'Admin' && authEmail.toLowerCase() === PROTECTED_ADMIN_EMAIL.toLowerCase()){
+  fresh = await writeProfile(credential.user.uid, {
+    name: 'Hajer',
+    username: PROTECTED_ADMIN_USERNAME,
+    email: PROTECTED_ADMIN_EMAIL,
+    authEmail: PROTECTED_ADMIN_EMAIL,
+    role: 'Admin',
+    status: 'approved',
+    mustChangePassword: false,
+    area: 'Pediatric Home Ventilation',
+    profileType: 'Inventory Team Member'
+  });
+}else{
         await auth.signOut();
         throw new Error('Incorrect username, password, or role.');
       }
