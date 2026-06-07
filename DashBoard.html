@@ -1536,6 +1536,21 @@
   transform:translateY(-1px);
 }
 
+.report-export-btn--ghost{
+  background:rgba(255,255,255,0.12);
+  border-color:rgba(255,255,255,0.2);
+}
+
+.report-export-btn--ghost:hover{
+  background:rgba(255,255,255,0.2);
+}
+
+.report-export-btn:disabled{
+  opacity:0.55;
+  cursor:wait;
+  transform:none;
+}
+
 .dashboard-content{
   position:relative;
   z-index:4;
@@ -1976,6 +1991,15 @@
 .trach-pdf-export-root .trach-tube-card{
   break-inside:avoid;
   page-break-inside:avoid;
+}
+
+.trach-visual-export-host{
+  position:fixed;
+  left:-12000px;
+  top:0;
+  z-index:-1;
+  pointer-events:none;
+  overflow:hidden;
 }
 
 .dashboard-card.dashboard-full{margin-bottom:22px;}
@@ -3439,7 +3463,8 @@ body.entry-modal-open{
           <div class="report-toolbar">
             <p class="report-data-status loading" id="trachDashboardDataStatus">Loading Tracheostomy sheet…</p>
             <div class="report-toolbar-actions">
-              <button type="button" class="report-export-btn" onclick="exportActivePageData()">↓ Export PDF</button>
+              <button type="button" class="report-export-btn" id="trachExportCardsPngBtn" onclick="exportTrachDashboardVisualPng()">📷 Save Image</button>
+              <button type="button" class="report-export-btn report-export-btn--ghost" onclick="exportTrachDashboardTablePdf()">↓ Table PDF</button>
               <button type="button" class="report-refresh-btn" onclick="refreshActivePageFromSheet()">↻ Refresh</button>
             </div>
           </div>
@@ -3755,6 +3780,7 @@ body.entry-modal-open{
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jspdf-autotable@3.8.4/dist/jspdf.plugin.autotable.min.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
@@ -6174,8 +6200,9 @@ body.entry-modal-open{
       const onError = forExport
         ? ''
         : ' onerror="this.parentElement.style.display=\'none\'"';
+      const loadingAttr = forExport ? '' : ' loading="lazy"';
       return '<div class="trach-tube-card-photo">' +
-        '<img src="' + escapeReportText(imageSrc) + '" alt="" loading="lazy"' + onError + '>' +
+        '<img src="' + escapeReportText(imageSrc) + '" alt=""' + loadingAttr + onError + '>' +
       '</div>';
     }
 
@@ -6699,6 +6726,123 @@ body.entry-modal-open{
       });
       return [{ title: 'Tracheostomy Dashboard', headers: headers, rows: rows }];
     }
+
+    function getOrCreateTrachVisualExportHost(){
+      let host = document.getElementById('trachVisualExportHost');
+      if(!host){
+        host = document.createElement('div');
+        host.id = 'trachVisualExportHost';
+        host.className = 'trach-visual-export-host';
+        host.setAttribute('aria-hidden', 'true');
+        document.body.appendChild(host);
+      }
+      return host;
+    }
+
+    function buildTrachVisualExportHtml(){
+      if(!trachDashboardGroups.length) return '';
+      const groupsHtml = trachDashboardGroups.map(function(group){
+        return '<div class="trach-dash-row">' + group.map(function(card){
+          return renderTrachDashboardCard(card, true);
+        }).join('') + '</div>';
+      }).join('');
+      return '<div class="trach-pdf-export-root">' +
+        '<div class="trach-pdf-export-head">' +
+          '<h1>Tracheostomy Dashboard</h1>' +
+          '<p>PediVent · PHDU Critical Items · ' + escapeReportText(exportDateStamp()) + '</p>' +
+          '<p class="trach-pdf-export-by">' + escapeReportText(PDF_PREPARED_BY) + '</p>' +
+        '</div>' +
+        '<div class="trach-dash-groups">' + groupsHtml + '</div>' +
+      '</div>';
+    }
+
+    function waitForImagesInElement(root, timeoutMs){
+      const imgs = Array.from(root.querySelectorAll('img'));
+      if(!imgs.length) return Promise.resolve();
+      const timeout = timeoutMs || 5000;
+      return Promise.all(imgs.map(function(img){
+        if(img.complete && img.naturalWidth > 0) return Promise.resolve();
+        return new Promise(function(resolve){
+          const done = function(){ resolve(); };
+          img.onload = done;
+          img.onerror = done;
+          setTimeout(done, timeout);
+        });
+      }));
+    }
+
+    function setTrachVisualExportBusy(isBusy){
+      const btn = document.getElementById('trachExportCardsPngBtn');
+      if(btn) btn.disabled = !!isBusy;
+    }
+
+    async function renderTrachVisualExportRoot(){
+      if(!trachDashboardGroups.length){
+        alert('No Tracheostomy dashboard data to export.');
+        return null;
+      }
+      if(typeof html2canvas !== 'function'){
+        alert('Image export library failed to load. Check your internet connection and refresh.');
+        return null;
+      }
+      const host = getOrCreateTrachVisualExportHost();
+      host.innerHTML = buildTrachVisualExportHtml();
+      const root = host.querySelector('.trach-pdf-export-root');
+      if(!root) return null;
+      await waitForImagesInElement(root, 5000);
+      await new Promise(function(resolve){
+        requestAnimationFrame(function(){
+          requestAnimationFrame(resolve);
+        });
+      });
+      return root;
+    }
+
+    async function captureTrachDashboardCanvas(root){
+      return html2canvas(root, {
+        scale: 2,
+        useCORS: true,
+        allowTaint: false,
+        backgroundColor: '#ffffff',
+        logging: false
+      });
+    }
+
+    function downloadCanvasAsPng(canvas, filename){
+      const link = document.createElement('a');
+      link.href = canvas.toDataURL('image/png');
+      link.download = filename;
+      link.click();
+    }
+
+    async function exportTrachDashboardVisualPng(){
+      setTrachVisualExportBusy(true);
+      const host = getOrCreateTrachVisualExportHost();
+      try{
+        const root = await renderTrachVisualExportRoot();
+        if(!root) return;
+        const canvas = await captureTrachDashboardCanvas(root);
+        downloadCanvasAsPng(canvas, 'phdu-tracheostomy-cards-' + exportDateStamp() + '.png');
+      }catch(err){
+        console.error(err);
+        alert('Could not save Tracheostomy dashboard image. Try again with Live Server (http://localhost).');
+      }finally{
+        host.innerHTML = '';
+        setTrachVisualExportBusy(false);
+      }
+    }
+
+    function exportTrachDashboardTablePdf(){
+      const sections = buildTrachDashboardExportSections();
+      if(!sections.length){
+        alert('No visible data to export on this page.');
+        return;
+      }
+      downloadPdfFile('phdu-tracheostomy-table-' + exportDateStamp() + '.pdf', getExportPageTitle(), sections);
+    }
+
+    window.exportTrachDashboardVisualPng = exportTrachDashboardVisualPng;
+    window.exportTrachDashboardTablePdf = exportTrachDashboardTablePdf;
 
     function exportActivePageData(){
       let sections = [];
