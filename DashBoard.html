@@ -2825,6 +2825,227 @@ body.entry-modal-open{
 .entry-submit-status.error{background:#fef2f2;color:#dc2626;}
 .entry-submit-status.loading{background:rgba(94,53,177,0.10);color:#5E35B1;}
 
+/* ===== Tracheostomy Box Smart Scanner ===== */
+.scan-card{
+  border:1px solid #dbe7f5;
+  border-radius:18px;
+  background:linear-gradient(180deg,#fafbff 0%,#fff 100%);
+  box-shadow:0 10px 26px rgba(15,61,115,.07);
+  overflow:hidden;
+  margin-bottom:4px;
+}
+
+.scan-card-head{
+  padding:14px 16px 12px;
+  border-bottom:1px solid #e8f0fa;
+  background:linear-gradient(135deg,rgba(94,53,177,0.08) 0%,rgba(38,166,154,0.06) 100%);
+}
+
+.scan-card-head h4{
+  margin:0 0 4px;
+  font-size:15px;
+  font-weight:900;
+  color:#5e35b1;
+}
+
+.scan-card-head p{
+  margin:0;
+  font-size:12px;
+  color:#64748b;
+  line-height:1.45;
+}
+
+.scan-card-body{
+  padding:14px 16px 16px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.scan-upload-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  align-items:center;
+}
+
+.scan-file-input{
+  position:absolute;
+  width:1px;
+  height:1px;
+  opacity:0;
+  pointer-events:none;
+}
+
+.scan-btn{
+  border:1px solid rgba(94,53,177,0.28);
+  background:linear-gradient(135deg,rgba(94,53,177,0.92) 0%,rgba(30,136,229,0.82) 55%,rgba(38,166,154,0.86) 100%);
+  color:#fff;
+  padding:9px 14px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:800;
+  cursor:pointer;
+  transition:filter .18s,transform .15s;
+}
+
+.scan-btn:hover:not(:disabled){
+  filter:brightness(1.06);
+  transform:translateY(-1px);
+}
+
+.scan-btn:disabled{
+  opacity:.55;
+  cursor:not-allowed;
+  transform:none;
+}
+
+.scan-btn--ghost{
+  background:#fff;
+  color:#5e35b1;
+  border-color:#dbe7f5;
+}
+
+.scan-btn--ghost:hover:not(:disabled){
+  background:rgba(94,53,177,0.06);
+}
+
+.scan-preview-wrap{
+  display:none;
+  border:1px dashed #cbd5e1;
+  border-radius:14px;
+  padding:10px;
+  background:#f8fafc;
+  text-align:center;
+}
+
+.scan-preview-wrap.show{display:block;}
+
+.scan-preview-wrap img{
+  max-width:100%;
+  max-height:180px;
+  border-radius:10px;
+  object-fit:contain;
+}
+
+.scan-status{
+  display:none;
+  font-size:12px;
+  font-weight:700;
+  padding:9px 12px;
+  border-radius:12px;
+  line-height:1.4;
+}
+
+.scan-status.show{display:block;}
+.scan-status--loading{background:rgba(94,53,177,0.10);color:#5e35b1;}
+.scan-status--success{background:#ecfdf3;color:#15803d;}
+.scan-status--warning{background:#fff7ed;color:#c2410c;}
+.scan-status--error{background:#fef2f2;color:#dc2626;}
+.scan-status--info{background:#f0f7ff;color:#334155;}
+
+.scan-result{
+  display:none;
+  border:1px solid #e2e8f0;
+  border-radius:14px;
+  background:#fff;
+  overflow:hidden;
+}
+
+.scan-result.show{display:block;}
+
+.scan-result-head{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  padding:10px 12px;
+  border-bottom:1px solid #eef2f7;
+  background:#f8fafc;
+}
+
+.scan-result-head strong{
+  font-size:12px;
+  color:#334155;
+}
+
+.scan-confidence{
+  font-size:11px;
+  font-weight:800;
+  padding:4px 10px;
+  border-radius:999px;
+}
+
+.scan-confidence--high{background:#ecfdf3;color:#15803d;}
+.scan-confidence--medium{background:#fff7ed;color:#c2410c;}
+.scan-confidence--low{background:#fef2f2;color:#dc2626;}
+.scan-confidence--failed{background:#f1f5f9;color:#64748b;}
+
+.scan-result-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:8px;
+  padding:10px 12px 12px;
+}
+
+.scan-result-item{
+  border:1px solid #eef2f7;
+  border-radius:12px;
+  padding:8px 10px;
+  background:#fafcff;
+}
+
+.scan-result-item span{
+  display:block;
+  font-size:10px;
+  font-weight:700;
+  color:#64748b;
+  text-transform:uppercase;
+  letter-spacing:.03em;
+  margin-bottom:3px;
+}
+
+.scan-result-item strong{
+  display:block;
+  font-size:12px;
+  color:#0f2748;
+  line-height:1.35;
+  word-break:break-word;
+}
+
+.scan-result-item.needs-review strong{color:#c2410c;}
+
+.scan-result-candidates{
+  padding:0 12px 10px;
+  font-size:11px;
+  color:#64748b;
+  line-height:1.45;
+  word-break:break-word;
+}
+
+.scan-warning{
+  margin:0;
+  font-size:11px;
+  color:#b45309;
+  line-height:1.45;
+  padding:10px 12px;
+  border-top:1px solid #fef3c7;
+  background:#fffbeb;
+}
+
+.scan-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+@media (max-width:760px){
+  .scan-result-grid{grid-template-columns:1fr;}
+  .scan-actions .scan-btn{flex:1 1 calc(50% - 4px);text-align:center;}
+  .scan-preview-wrap img{max-height:150px;}
+}
+
 .dashboard-recent-table{
   width:100%;
   border-collapse:collapse;
@@ -7039,6 +7260,8 @@ body.entry-modal-open{
       loadAndRenderDashboard();
     });
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+  <script src="trach-box-scanner.js"></script>
   <script src="phdu-entry-form.js"></script>
 
 
