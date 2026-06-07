@@ -238,10 +238,23 @@
     const pct = steps.length > 1 ? Math.round(((entryWizardStepIndex + 1) / steps.length) * 100) : 0;
     const bar = document.getElementById('entryWizardProgressBar');
     const label = document.getElementById('entryWizardProgress');
+    const mobileSteps = document.getElementById('entryWizardMobileSteps');
     if(bar) bar.style.width = pct + '%';
     if(label){
       const step = steps[entryWizardStepIndex];
       label.textContent = 'Step ' + (entryWizardStepIndex + 1) + ' of ' + steps.length + ' — ' + (step.section || step.title);
+    }
+    if(mobileSteps){
+      mobileSteps.innerHTML = steps.map(function(step, idx){
+        const cls = idx < entryWizardStepIndex ? 'done' : (idx === entryWizardStepIndex ? 'active' : '');
+        const num = idx < entryWizardStepIndex ? '✓' : String(idx + 1);
+        const title = escapeReportText(step.section || step.title);
+        return '<span class="entry-mobile-step ' + cls + '" title="' + title + '" aria-label="' + title + '">' + num + '</span>';
+      }).join('');
+      const active = mobileSteps.querySelector('.entry-mobile-step.active');
+      if(active && typeof active.scrollIntoView === 'function'){
+        active.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' });
+      }
     }
   }
 
@@ -360,6 +373,9 @@
     body.innerHTML = html;
     bindEntryFieldEvents(step.id);
     scrollWizardBodyToTop();
+    if(typeof window.mountTrachBoxScanner === 'function'){
+      window.mountTrachBoxScanner(step.id);
+    }
   }
 
   function validateEntryWizardStep(){
@@ -532,6 +548,7 @@
     entryWizardStepIndex = 0;
     entryWizardSubmitting = false;
     setEntrySubmitStatus('', '');
+    if(typeof window.clearTrachScan === 'function') window.clearTrachScan(true);
     lockPageScroll();
     document.getElementById('entryWizardOverlay').classList.add('show');
     renderEntryWizardStep();
@@ -562,6 +579,26 @@
       entryWizardStepIndex++;
       renderEntryWizardStep();
     }
+  };
+
+  window.PHDUEntryWizard = {
+    getState: function(){
+      return Object.assign({}, entryFormState);
+    },
+    setState: function(partial){
+      Object.assign(entryFormState, partial || {});
+    },
+    rerender: function(){
+      renderEntryWizardStep();
+    },
+    readFields: readEntryWizardFields,
+    getCurrentStepId: function(){
+      const steps = getEntryWizardSteps(entryFormState);
+      const step = steps[entryWizardStepIndex];
+      return step ? step.id : '';
+    },
+    isoDateToSheet: isoDateToSheet,
+    sheetDateToIso: sheetDateToIso
   };
 
   async function submitEntryWizard(){
