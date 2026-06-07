@@ -2051,7 +2051,7 @@
         <!-- Sign In Form -->
         <div class="form-container sign-in">
           <h1>Sign In</h1>
-          <div class="formHint">Sign in with your full name, password, and role</div>
+          <div class="formHint">Sign in with your username or email, password, and role</div>
 
           <div class="rolePreview">
             <div class="roleChip">Doctor</div>
@@ -2060,7 +2060,7 @@
           </div>
 
        <div class="input-group">
-  <input type="text" id="loginEmail" placeholder="Full Name" value="" />
+  <input type="text" id="loginEmail" placeholder="Username or Email" value="" />
   <span class="inputIcon">👤</span>
 </div>
 
@@ -2160,19 +2160,19 @@
     let pendingRemember = false;
     let pendingUsername = '';
 
-    const DEFAULT_ADMIN = {
-      id: 1,
-      name: 'Hajer',
-      username: 'Hajer2007',
-      email: 'Hajer2007',
-      phone: 'Not added',
-      role: 'Admin',
-      area: 'Pediatric Home Ventilation',
-      profileType: 'Inventory Team Member',
-      password: '1234',
-      status: 'approved',
-      mustChangePassword: true
-    };
+const DEFAULT_ADMIN = {
+  id: 1,
+  name: 'Hajer',
+  username: 'Hajer@2007',
+  email: 'hmssoon@gmail.com',
+  phone: 'Not added',
+  role: 'Admin',
+  area: 'Pediatric Home Ventilation',
+  profileType: 'Inventory Team Member',
+  password: '',
+  status: 'approved',
+  mustChangePassword: false
+};
 
     const USERS_STORAGE_KEY = 'users';
 
@@ -2207,46 +2207,43 @@
         source: 'index-signup'
       };
     }
+function ensureDefaultAdminExists(){
+  const users = getStoredUsers();
 
-    function ensureDefaultAdminExists(){
-      const users = getStoredUsers();
-      const adminKey = 'hajer2007';
-      const adminIndex = users.findIndex(u =>
-        u.role === 'Admin' &&
-        (
-          String(u.username || '').toLowerCase() === adminKey ||
-          String(u.email || '').toLowerCase() === adminKey ||
-          String(u.name || '').toLowerCase() === 'hajer'
-        )
-      );
+  const adminKeys = [
+    'hajer@2007',
+    'hmssoon@gmail.com',
+    'hajer2007',
+    'hajer'
+  ];
 
-      if(adminIndex === -1){
-        users.unshift({ ...DEFAULT_ADMIN });
-        saveStoredUsers(users);
-        return;
-      }
+  const adminIndex = users.findIndex(u =>
+    u.role === 'Admin' &&
+    [
+      u.username,
+      u.email,
+      u.name
+    ].some(v => adminKeys.includes(String(v || '').toLowerCase()))
+  );
 
-      const admin = users[adminIndex];
-      let updated = false;
-      const repaired = {
-        ...DEFAULT_ADMIN,
-        ...admin,
-        id: admin.id || DEFAULT_ADMIN.id,
-        role: 'Admin',
-        status: 'approved',
-        username: admin.username || DEFAULT_ADMIN.username,
-        email: admin.email || DEFAULT_ADMIN.email,
-        name: admin.name || DEFAULT_ADMIN.name
-      };
+  if(adminIndex === -1){
+    users.unshift({ ...DEFAULT_ADMIN });
+    saveStoredUsers(users);
+    return;
+  }
 
-      if(admin.status !== 'approved' || admin.role !== 'Admin'){
-        users[adminIndex] = repaired;
-        updated = true;
-      }
+  const oldAdmin = users[adminIndex];
 
-      if(updated) saveStoredUsers(users);
-    }
+  users[adminIndex] = {
+    ...oldAdmin,
+    ...DEFAULT_ADMIN,
+    id: oldAdmin.id || DEFAULT_ADMIN.id,
+    role: 'Admin',
+    status: 'approved'
+  };
 
+  saveStoredUsers(users);
+}
     function clearLoginForm(){
       document.getElementById('loginEmail').value = '';
       document.getElementById('loginPassword').value = '';
@@ -2497,10 +2494,23 @@
       }
     }
 
-    function forgotPassword(event){
-      event.preventDefault();
-      showMessage('loginMessage', 'Contact your admin to reset your password.', 'success');
-    }
+async function forgotPassword(event){
+  event.preventDefault();
+
+  const email = prompt("Enter your registered email:");
+
+  if(!email){
+    showMessage('loginMessage', 'Please enter your email.', 'error');
+    return;
+  }
+
+  try{
+    await firebase.auth().sendPasswordResetEmail(email.trim());
+    showMessage('loginMessage', 'Password reset link sent. Please check your email.', 'success');
+  }catch(error){
+    showMessage('loginMessage', PediVentFirebase.mapAuthError(error), 'error');
+  }
+}
 
     function isUserLoggedIn(){
       return sessionStorage.getItem('pediventLoggedIn') === 'true';
