@@ -1683,6 +1683,14 @@
 
 .chart-wrap.tall{height:320px;}
 
+.chart-wrap-expiry.chart-wrap-dynamic{
+  height:var(--chart-dynamic-height, 320px);
+}
+
+.chart-expiry-scroll{
+  width:100%;
+}
+
 .chart-wrap.trend{
   height:420px;
   min-height:360px;
@@ -2062,6 +2070,117 @@
 
 .entry-add-btn:hover{
   filter:brightness(1.05);
+}
+
+/* Desktop — compact navbar (DashBoard only) */
+@media (min-width: 1181px) {
+  .navbar {
+    top: 18px;
+    min-height: 68px;
+    gap: 16px;
+    padding: 10px 18px;
+    border-radius: 22px;
+  }
+
+  .brand {
+    gap: 12px;
+  }
+
+  .logo {
+    width: 42px;
+    height: 42px;
+    border-radius: 13px;
+    font-size: 11px;
+  }
+
+  .brand h2 {
+    font-size: 15px;
+  }
+
+  .brand span {
+    margin-top: 6px;
+    font-size: 10px;
+    letter-spacing: 2.5px;
+  }
+
+  .nav-links {
+    gap: 7px;
+    padding: 4px;
+    border-radius: 18px;
+  }
+
+  .nav-links a {
+    font-size: 9px;
+    padding: 11px 20px;
+    border-radius: 14px;
+  }
+
+  .nav-actions {
+    gap: 8px;
+  }
+
+  .status-pill,
+  .admin-login-btn,
+  .user-nav-pill {
+    height: 40px;
+    padding: 0 16px;
+    border-radius: 13px;
+    gap: 8px;
+    font-size: 9px;
+  }
+
+  .user-nav-pill {
+    max-width: min(210px, 30vw);
+  }
+
+  .user-nav-avatar {
+    width: 24px;
+    height: 24px;
+    font-size: 12px;
+  }
+
+  .user-nav-text strong {
+    font-size: 10px;
+    max-width: 140px;
+  }
+
+  .user-nav-text small {
+    font-size: 8px;
+    max-width: 140px;
+  }
+
+  .user-signout-btn {
+    height: 40px;
+    padding: 0 12px;
+    border-radius: 13px;
+    font-size: 9px;
+  }
+
+  .entry-add-btn {
+    height: 40px;
+    padding: 0 14px;
+    border-radius: 13px;
+    font-size: 9px;
+  }
+
+  .status-dot {
+    width: 9px;
+    height: 9px;
+  }
+
+  .hero,
+  .hero.page-section {
+    padding-top: 120px;
+  }
+
+  .dashboard-content {
+    margin-top: -1.1rem;
+  }
+
+  .app-copyright {
+    margin-top: -2.5rem;
+    padding: 4px 16px 18px;
+  }
 }
 
 .entry-wizard-overlay{
@@ -2465,12 +2584,119 @@ body.entry-modal-open{
   box-shadow:0 0 0 4px rgba(94,53,177,0.14);
 }
 
+.entry-wizard-head-note--mobile{display:none;}
+
+.entry-wizard-mobile-steps{display:none;}
+
 @media (max-width:760px){
   .entry-wizard-layout{grid-template-columns:1fr;}
   .entry-wizard-sidebar{display:none;}
-  .entry-wizard-box{width:100%;height:calc(100vh - 16px);max-height:calc(100vh - 16px);border-radius:20px;}
-  .entry-wizard-body{max-height:calc(100vh - 220px);}
-  .entry-wizard-overlay{padding:8px;}
+  .entry-wizard-box{
+    width:100%;
+    height:100dvh;
+    max-height:100dvh;
+    border-radius:0;
+  }
+  .entry-wizard-overlay{padding:0;}
+  .entry-wizard-main{
+    display:flex;
+    flex-direction:column;
+    min-height:0;
+    height:100%;
+  }
+  .entry-wizard-body{
+    flex:1 1 auto;
+    min-height:0;
+    max-height:none;
+    padding:12px 14px 16px;
+  }
+  .entry-wizard-head{
+    padding:calc(12px + env(safe-area-inset-top, 0px)) 14px 10px;
+    flex-shrink:0;
+  }
+  .entry-wizard-head h2{
+    font-size:18px;
+    margin-bottom:4px;
+    padding-right:48px;
+  }
+  .entry-wizard-head-note--desktop{display:none;}
+  .entry-wizard-head-note--mobile{
+    display:block;
+    font-size:12px;
+    line-height:1.4;
+    max-width:none;
+  }
+  .entry-wizard-close{
+    top:calc(10px + env(safe-area-inset-top, 0px));
+    right:12px;
+    width:40px;
+    height:40px;
+    border-radius:12px;
+  }
+  .entry-wizard-progress-wrap,
+  .entry-wizard-progress,
+  .entry-wizard-mobile-steps{flex-shrink:0;}
+  .entry-wizard-foot{
+    flex-shrink:0;
+    padding:10px 14px calc(12px + env(safe-area-inset-bottom, 0px));
+    gap:8px;
+    flex-direction:column-reverse;
+  }
+  .entry-wizard-foot button{
+    width:100%;
+    min-height:48px;
+  }
+  .entry-wizard-mobile-steps{
+    display:flex;
+    gap:6px;
+    padding:8px 14px 10px;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    background:rgba(94,53,177,0.05);
+    border-bottom:1px solid rgba(94,53,177,0.08);
+  }
+  .entry-mobile-step{
+    flex:0 0 30px;
+    width:30px;
+    height:30px;
+    border-radius:999px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    font-size:11px;
+    font-weight:800;
+    background:#e8eaf6;
+    color:#5e35b1;
+  }
+  .entry-mobile-step.active{
+    background:linear-gradient(135deg,#5E35B1,#1E88E5);
+    color:#fff;
+    box-shadow:0 4px 12px rgba(94,53,177,0.35);
+  }
+  .entry-mobile-step.done{
+    background:rgba(38,166,154,0.22);
+    color:#0f766e;
+  }
+  .entry-choice-grid:not(.entry-choice-grid--categories){
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:8px;
+  }
+  .entry-choice-grid--categories{
+    grid-template-columns:1fr;
+  }
+  .entry-step-panel{
+    border-radius:16px;
+  }
+  .entry-step-panel-head{
+    padding:12px 14px 10px;
+  }
+  .entry-step-panel-head h3{
+    font-size:15px;
+  }
+  .entry-step-panel-body{
+    padding:12px 14px 14px;
+    gap:14px;
+  }
 }
 
 .entry-field{
@@ -3051,7 +3277,9 @@ body.entry-modal-open{
               <h3>D. Expiry Status by Item</h3>
               <p class="chart-subtitle">Valid, near expiry, and expired counts split per item — not one general total</p>
               <div class="chart-mini-stats" id="chartStatsExpiryStatus"></div>
-              <div class="chart-wrap tall"><canvas id="chartExpiryByItem"></canvas></div>
+              <div class="chart-expiry-scroll">
+                <div class="chart-wrap tall chart-wrap-expiry"><canvas id="chartExpiryByItem"></canvas></div>
+              </div>
             </div>
             <div class="dashboard-card chart-card dashboard-full" style="grid-column:1/-1;">
               <h3>E. Available by Item</h3>
@@ -3238,7 +3466,7 @@ body.entry-modal-open{
     <!-- ================= INVENTORY ================= -->
     <section class="hero page-section reports-page hidden" id="inventorySection">
       <div class="hero-header">
-        <h1 class="hero-title">Inventory</h1>
+        
       </div>
       <div class="reports-content">
         <div class="reports-panel">
@@ -3376,7 +3604,7 @@ body.entry-modal-open{
     <!-- ================= EQUIPMENT ================= -->
     <section class="hero page-section reports-page hidden" id="equipmentSection">
       <div class="hero-header">
-        <h1 class="hero-title">Equipment</h1>
+        
       </div>
       <div class="reports-content">
         <div class="reports-panel">
@@ -3434,7 +3662,7 @@ body.entry-modal-open{
     <!-- ================= ALERTS ================= -->
     <section class="hero page-section reports-page hidden" id="alertsSection">
       <div class="hero-header">
-        <h1 class="hero-title">Alerts</h1>
+        
       </div>
       <div class="reports-content">
         <div class="reports-panel">
@@ -3509,10 +3737,12 @@ body.entry-modal-open{
           <div class="entry-wizard-head">
             <button type="button" class="entry-wizard-close" onclick="closeEntryWizard()" aria-label="Close">&times;</button>
             <h2 id="entryWizardTitle">New Inventory Entry</h2>
-            <p>Matches the official <a href="https://docs.google.com/forms/d/e/1FAIpQLScCaS3_h_hrzSs0IRABX8d5pazPD3CwaJMN_gKXOrMzJKxX2A/viewform" target="_blank" rel="noopener">Google Form</a> — saved directly to the sheet.</p>
+            <p class="entry-wizard-head-note entry-wizard-head-note--desktop">Matches the official <a href="https://docs.google.com/forms/d/e/1FAIpQLScCaS3_h_hrzSs0IRABX8d5pazPD3CwaJMN_gKXOrMzJKxX2A/viewform" target="_blank" rel="noopener">Google Form</a> — saved directly to the sheet.</p>
+            <p class="entry-wizard-head-note entry-wizard-head-note--mobile">Step-by-step entry — saved directly to your sheet.</p>
           </div>
           <div class="entry-wizard-progress-wrap"><div class="entry-wizard-progress-bar" id="entryWizardProgressBar"></div></div>
           <div class="entry-wizard-progress" id="entryWizardProgress">Step 1</div>
+          <div class="entry-wizard-mobile-steps" id="entryWizardMobileSteps" aria-hidden="true"></div>
           <div class="entry-wizard-body" id="entryWizardBody"></div>
           <p class="entry-submit-status" id="entrySubmitStatus"></p>
           <div class="entry-wizard-foot">
@@ -4735,6 +4965,133 @@ body.entry-modal-open{
       dashboardCharts[id] = new Chart(canvas, config);
     }
 
+    function isDashboardMobileView(){
+      return window.matchMedia('(max-width: 1180px)').matches;
+    }
+
+    let lastDashboardAnalytics = null;
+
+    function shortenChartLabel(label, maxLen){
+      const text = String(label || '');
+      if(text.length <= maxLen) return text;
+      return text.slice(0, Math.max(4, maxLen - 1)) + '…';
+    }
+
+    function syncExpiryChartWrapHeight(itemCount){
+      const canvas = document.getElementById('chartExpiryByItem');
+      const wrap = canvas && canvas.closest('.chart-wrap');
+      const scroll = canvas && canvas.closest('.chart-expiry-scroll');
+      if(!wrap) return;
+
+      if(isDashboardMobileView()){
+        const height = Math.max(360, Math.min(460, 320 + Math.min(itemCount, 10) * 14));
+        wrap.style.setProperty('--chart-dynamic-height', height + 'px');
+        wrap.classList.add('chart-wrap-dynamic');
+        if(scroll){
+          scroll.style.overflowX = 'visible';
+          wrap.style.minWidth = '100%';
+        }
+      }else{
+        wrap.style.removeProperty('--chart-dynamic-height');
+        wrap.style.removeProperty('min-width');
+        wrap.classList.remove('chart-wrap-dynamic');
+        if(scroll) scroll.style.overflowX = '';
+      }
+    }
+
+    function buildExpiryChartConfig(expiryItems){
+      const mobileExpiry = isDashboardMobileView();
+      const labels = expiryItems.map(function(i){ return i.label; });
+      const displayLabels = mobileExpiry
+        ? labels.map(function(label){ return shortenChartLabel(label, 14); })
+        : labels;
+      const datasets = [
+        { label:'Valid', data: expiryItems.map(function(i){ return i.valid; }), backgroundColor:'#059669', stack:'expiry', borderRadius:4, maxBarThickness: mobileExpiry ? 28 : 36 },
+        { label:'Near Expiry', data: expiryItems.map(function(i){ return i.near; }), backgroundColor:'#f59e0b', stack:'expiry', borderRadius:4, maxBarThickness: mobileExpiry ? 28 : 36 },
+        { label:'Expired', data: expiryItems.map(function(i){ return i.expired; }), backgroundColor:'#dc2626', stack:'expiry', borderRadius:4, maxBarThickness: mobileExpiry ? 28 : 36 }
+      ];
+
+      if(mobileExpiry){
+        return {
+          type:'bar',
+          data:{ labels: displayLabels, datasets: datasets },
+          options:{
+            responsive:true,
+            maintainAspectRatio:false,
+            layout:{ padding:{ top:6, right:8, bottom:4, left:4 } },
+            interaction: defaultChartInteraction(),
+            plugins:{
+              legend:{
+                position:'bottom',
+                labels:{ boxWidth:10, padding:12, font:{ size:10 } }
+              },
+              tooltip: Object.assign({}, defaultTooltip(), {
+                callbacks:{
+                  title: function(items){
+                    const idx = items[0] && items[0].dataIndex;
+                    return idx == null ? '' : labels[idx] || '';
+                  }
+                }
+              })
+            },
+            scales:{
+              x:{
+                stacked:true,
+                ticks:{
+                  color:'#64748b',
+                  font:{ size:9 },
+                  maxRotation:55,
+                  minRotation:35,
+                  autoSkip:false
+                },
+                grid:{ display:false }
+              },
+              y:{
+                stacked:true,
+                beginAtZero:true,
+                ticks:{ precision:0, color:'#64748b', font:{ size:10 } },
+                grid:{ color:'#eef2f7' }
+              }
+            }
+          }
+        };
+      }
+
+      return {
+        type:'bar',
+        data:{ labels: labels, datasets: datasets },
+        options:{
+          indexAxis:'y',
+          responsive:true,
+          maintainAspectRatio:false,
+          layout:{ padding:{ top:4, right:8, bottom:4, left:2 } },
+          interaction: defaultChartInteraction(),
+          plugins:{
+            legend:{ position:'top', labels:{ boxWidth:10, font:{ size:10 } } },
+            tooltip: defaultTooltip()
+          },
+          scales:{
+            x:{
+              stacked:true,
+              beginAtZero:true,
+              ticks:{ precision:0, color:'#64748b', font:{ size:11 } },
+              grid:{ color:'#eef2f7' }
+            },
+            y:{
+              stacked:true,
+              ticks:{ color:'#64748b', autoSkip:false, font:{ size:11 } },
+              grid:{ display:false }
+            }
+          }
+        }
+      };
+    }
+
+    function refreshExpiryChartLayout(){
+      if(!lastDashboardAnalytics) return;
+      renderMainItemCharts(lastDashboardAnalytics);
+    }
+
     function renderChartMiniStats(elementId, items){
       const box = document.getElementById(elementId);
       if(!box) return;
@@ -4871,30 +5228,10 @@ body.entry-modal-open{
       chartFromMap('chartTopConsumed', Object.fromEntries(analytics.topConsumed), 'bar', true, 10, 'Quantity consumed', 'Item name');
 
       if(expiryItems.length){
-        upsertDashboardChart('chartExpiryByItem', {
-          type:'bar',
-          data:{
-            labels: expiryItems.map(function(i){ return i.label; }),
-            datasets:[
-              { label:'Valid', data: expiryItems.map(function(i){ return i.valid; }), backgroundColor:'#059669', stack:'expiry', borderRadius:4, maxBarThickness:36 },
-              { label:'Near Expiry', data: expiryItems.map(function(i){ return i.near; }), backgroundColor:'#f59e0b', stack:'expiry', borderRadius:4, maxBarThickness:36 },
-              { label:'Expired', data: expiryItems.map(function(i){ return i.expired; }), backgroundColor:'#dc2626', stack:'expiry', borderRadius:4, maxBarThickness:36 }
-            ]
-          },
-          options:{
-            indexAxis:'y',
-            responsive:true,
-            maintainAspectRatio:false,
-            interaction: defaultChartInteraction(),
-            plugins:{
-              legend:{ position:'top', labels:{ boxWidth:10, font:{ size:10 } } },
-              tooltip: defaultTooltip()
-            },
-            scales:{
-              x:{ stacked:true, beginAtZero:true, ticks:{ precision:0, color:'#64748b' }, grid:{ color:'#eef2f7' } },
-              y:{ stacked:true, ticks:{ color:'#64748b' }, grid:{ display:false } }
-            }
-          }
+        syncExpiryChartWrapHeight(expiryItems.length);
+        upsertDashboardChart('chartExpiryByItem', buildExpiryChartConfig(expiryItems));
+        requestAnimationFrame(function(){
+          if(dashboardCharts.chartExpiryByItem) dashboardCharts.chartExpiryByItem.resize();
         });
       }
 
@@ -5196,6 +5533,7 @@ body.entry-modal-open{
     function renderDashboardCharts(analytics){
       if(typeof Chart === 'undefined') return;
 
+      lastDashboardAnalytics = analytics;
       renderAllChartStats(analytics);
       renderMainItemCharts(analytics);
 
@@ -6536,6 +6874,12 @@ body.entry-modal-open{
         </tr>`;
       }).join('');
     }
+    let expiryChartResizeTimer;
+    window.addEventListener('resize', function(){
+      clearTimeout(expiryChartResizeTimer);
+      expiryChartResizeTimer = setTimeout(refreshExpiryChartLayout, 180);
+    });
+
     window.addEventListener('DOMContentLoaded', async function(){
       const ok = await initDashboardUser();
       if(!ok) return;
