@@ -5,6 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="author" content="Hajer Alshukairi" />
   <title>PediVent Inventory</title>
+  <script>
+    /* GitHub Pages: keep CSS/images working when URL has no trailing slash */
+    (function () {
+      var path = window.location.pathname || '/';
+      if (/\.html?$/i.test(path)) {
+        path = path.replace(/[^/]+$/, '');
+      } else if (!path.endsWith('/')) {
+        path += '/';
+      }
+      var base = document.createElement('base');
+      base.href = path;
+      document.head.appendChild(base);
+    })();
+  </script>
 
   <style>
     * {
@@ -55,7 +69,7 @@
           rgba(32, 93, 170, 0.15) 45%,
           rgba(0, 178, 178, 0.18) 100%
         ),
-        url("media/Purple And White Modern Mobile App Promotion Instagram Post.png");
+        url("media/hero-bg.png");
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -1568,7 +1582,7 @@
   height:100%;
   background:
     linear-gradient(rgba(20,16,75,0.50), rgba(20,16,75,0.50)),
-    url("media/Purple And White Modern Mobile App Promotion Instagram Post.png");
+    url("media/hero-bg.png");
   background-size:cover;
   background-position:center;
   background-repeat:no-repeat;
@@ -1749,8 +1763,8 @@
 }
 
   </style>
-  <link rel="stylesheet" href="mobile-responsive.css" />
-  <script src="mobile-nav.js" defer></script>
+  <link rel="stylesheet" href="./mobile-responsive.css?v=31" />
+  <script src="./mobile-nav.js?v=31" defer></script>
 </head>
 
 <body>
@@ -1860,7 +1874,7 @@
         <!-- CENTER IMAGE -->
         <div class="center-visual">
           <img
-            src="media/Untitled design (588).png"
+            src="media/hero-visual.png"
             alt="Inventory Dashboard"
             class="main-img"
           />
@@ -2182,7 +2196,7 @@
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
- <script src="firebase-users.js?v=30"></script>
+  <script src="./firebase-users.js?v=31"></script>
   <script>
     const popup = document.getElementById('popup');
     const container = document.getElementById('container');
