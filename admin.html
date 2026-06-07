@@ -955,7 +955,7 @@ body.dark-mode .app-copyright strong{color:#e2e8f0;}
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
-<script src="firebase-users.js"></script>
+<script src="firebase-users.js?v=40"></script>
 <script>
 let currentSection = 'requests';
 let currentAdmin = null;
@@ -1364,7 +1364,8 @@ async function saveTeamMember(){
       await PediVentFirebase.saveTeamMemberProfile(data, '');
     }
     closeModal('teamModal');
-    toast('Team member saved.');
+renderAll();
+toast('Team member saved.');
   }catch(error){
     toast(PediVentFirebase.mapAuthError(error));
   }
