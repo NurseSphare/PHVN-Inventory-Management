@@ -1374,6 +1374,8 @@
 }
 
 .report-table td{color:#1f2335;}
+.report-table .eq-hover-row:hover,.report-table .eq-hover-row:focus-within{background:#f0f9ff;}
+.report-table .eq-machine-cell{font-weight:700;}
 
 .report-badge{
   display:inline-block;
@@ -1388,6 +1390,201 @@
 .report-badge.critical{background:#fef2f2;color:#dc2626;}
 .report-badge.expired{background:#fef2f2;color:#dc2626;}
 .report-badge.near{background:#fff7ed;color:#c2410c;}
+
+.location-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  padding:5px 11px;
+  border-radius:999px;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.02em;
+  white-space:nowrap;
+}
+.location-badge-icon{font-size:12px;line-height:1;}
+.location-badge.loc-store{background:#eff6ff;color:#1d4ed8;border:1px solid #bfdbfe;}
+.location-badge.loc-phdu{background:#f5f3ff;color:#6d28d9;border:1px solid #ddd6fe;}
+.location-badge.loc-ward{background:#ecfeff;color:#0e7490;border:1px solid #a5f3fc;}
+.location-badge.loc-unit{background:#fff7ed;color:#c2410c;border:1px solid #fed7aa;}
+.location-badge.loc-issued{background:#fdf4ff;color:#a21caf;border:1px solid #f5d0fe;}
+.location-badge.loc-biomed{background:#f0fdf4;color:#15803d;border:1px solid #bbf7d0;}
+.location-badge.loc-default{background:#f8fafc;color:#475569;border:1px solid #e2e8f0;}
+.location-badge.loc-unknown{background:#f8fafc;color:#94a3b8;border:1px dashed #cbd5e1;font-weight:700;}
+
+.alert-location-panel{
+  background:linear-gradient(135deg,#f8fbff 0%,#fff 55%,#f5f3ff 100%);
+  border:1px solid #dbeafe;
+  border-radius:18px;
+  padding:18px 20px 20px;
+  margin-bottom:20px;
+  box-shadow:0 10px 28px rgba(15,61,115,.06);
+}
+.alert-location-panel h3{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin:0 0 4px;
+  font-size:16px;
+  color:#0f2748;
+}
+.alert-location-panel .chart-subtitle{margin-bottom:14px;}
+.alert-location-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:12px;
+}
+.alert-location-zone{
+  background:#fff;
+  border:1px solid #e3edf8;
+  border-radius:14px;
+  padding:12px 14px;
+  box-shadow:0 4px 14px rgba(15,61,115,.04);
+}
+.alert-location-zone-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  margin-bottom:10px;
+  padding-bottom:10px;
+  border-bottom:1px solid #eef2f7;
+}
+.alert-location-count{
+  font-size:10px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.04em;
+  color:#64748b;
+}
+.alert-location-items{
+  list-style:none;
+  margin:0;
+  padding:0;
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+}
+.alert-location-items li{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  font-size:12px;
+  color:#334155;
+  line-height:1.35;
+}
+.alert-location-item-name{
+  flex:1;
+  min-width:0;
+  font-weight:700;
+  color:#1e293b;
+}
+.alert-item-tag{
+  flex-shrink:0;
+  padding:2px 8px;
+  border-radius:999px;
+  font-size:9px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.03em;
+}
+.alert-item-tag.near{background:#fff7ed;color:#c2410c;}
+.alert-item-tag.expired{background:#fef2f2;color:#dc2626;}
+.alert-item-tag.stock{background:#fef2f2;color:#b91c1c;}
+
+.eq-hover-row{cursor:help;transition:background .15s ease;}
+.eq-hover-row:hover,.eq-hover-row:focus-within{background:#f0f9ff;}
+.eq-hover-row[data-eq-no-location]{cursor:default;}
+.eq-hover-row[data-eq-no-location]:hover{background:transparent;}
+.eq-machine-cell{position:relative;font-weight:700;}
+.eq-machine-cell.has-eq-tooltip{padding-right:22px;}
+.eq-location-pin{
+  position:absolute;
+  right:4px;
+  top:50%;
+  transform:translateY(-50%);
+  font-size:12px;
+  opacity:.55;
+  transition:opacity .15s ease, transform .15s ease;
+}
+.eq-hover-row:hover .eq-location-pin,.eq-hover-row:focus-within .eq-location-pin{
+  opacity:1;
+  transform:translateY(-50%) scale(1.1);
+}
+.eq-location-tooltip{
+  position:absolute;
+  top:calc(100% + 8px);
+  left:0;
+  z-index:30;
+  min-width:190px;
+  max-width:260px;
+  padding:10px 12px;
+  background:#0f2748;
+  color:#fff;
+  border-radius:12px;
+  box-shadow:0 12px 32px rgba(15,39,72,.28);
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(-4px);
+  transition:opacity .18s ease, transform .18s ease, visibility .18s ease;
+  pointer-events:none;
+  text-align:left;
+}
+.eq-location-tooltip::before{
+  content:'';
+  position:absolute;
+  bottom:100%;
+  left:18px;
+  border:6px solid transparent;
+  border-bottom-color:#0f2748;
+}
+.eq-hover-row:hover .eq-location-tooltip,.eq-hover-row:focus-within .eq-location-tooltip{
+  opacity:1;
+  visibility:visible;
+  transform:translateY(0);
+}
+.eq-location-tooltip-title{
+  display:block;
+  font-size:10px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+  color:#93c5fd;
+  margin-bottom:8px;
+}
+.eq-location-tooltip-row{
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  margin-bottom:7px;
+}
+.eq-location-tooltip-row:last-child{margin-bottom:0;}
+.eq-location-tooltip-row small{
+  font-size:9px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.04em;
+  color:rgba(255,255,255,.55);
+}
+.eq-location-tooltip-row strong{
+  font-size:12px;
+  font-weight:800;
+  color:#fff;
+  line-height:1.35;
+}
+.eq-location-tooltip--empty strong{color:#cbd5e1;font-weight:700;}
+.eq-table-hint{
+  font-size:12px;
+  color:#64748b;
+  margin:-6px 0 12px;
+  font-weight:600;
+}
+.dash-table-scroll.eq-table-scroll,
+.report-table-wrap.eq-table-scroll{
+  overflow-x:auto;
+  overflow-y:visible;
+}
 
 .report-purpose{
   background:#f8fbff;
@@ -1938,6 +2135,526 @@
   text-align:center;
   padding:40px 16px;
   font-weight:700;
+}
+
+.fefo-studio{
+  background:linear-gradient(135deg,#f8fbff 0%,#fff 55%,#f5f3ff 100%);
+  border:1px solid #dbeafe;
+  border-radius:18px;
+  padding:20px 22px 22px;
+  margin-bottom:22px;
+  box-shadow:0 10px 28px rgba(15,61,115,.06);
+  overflow:visible;
+}
+.fefo-studio-head{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:16px;
+  margin-bottom:18px;
+}
+.fefo-kicker{
+  display:inline-block;
+  padding:4px 10px;
+  border-radius:999px;
+  background:#f5f3ff;
+  border:1px solid #ddd6fe;
+  color:#6d28d9;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  margin-bottom:8px;
+}
+.fefo-studio-head h3{
+  margin:0 0 6px;
+  font-size:18px;
+  font-weight:900;
+  color:#0f2748;
+}
+.fefo-studio-head p{
+  margin:0;
+  max-width:560px;
+  color:#64748b;
+  font-size:13px;
+  line-height:1.5;
+  font-weight:600;
+}
+.fefo-steps{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+.fefo-step{
+  padding:7px 12px;
+  border-radius:999px;
+  border:1px solid #e3edf8;
+  background:#fff;
+  color:#94a3b8;
+  font-size:10px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+  transition:all .2s ease;
+  box-shadow:0 4px 12px rgba(15,61,115,.04);
+}
+.fefo-step.is-active{
+  border-color:#c4b5fd;
+  background:#f5f3ff;
+  color:#5e35b1;
+  box-shadow:0 0 0 3px rgba(94,53,177,.12);
+}
+.fefo-step.is-done{
+  border-color:#bbf7d0;
+  background:#ecfdf5;
+  color:#059669;
+}
+.fefo-studio-body{
+  display:grid;
+  grid-template-columns:minmax(260px,320px) minmax(0,1fr);
+  gap:16px;
+  align-items:start;
+}
+.fefo-config{
+  background:#fff;
+  border:1px solid #e3edf8;
+  border-radius:16px;
+  padding:16px;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  box-shadow:0 8px 20px rgba(15,61,115,.05);
+}
+.fefo-chip-block label{
+  display:block;
+  font-size:10px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+  color:#64748b;
+  margin-bottom:8px;
+}
+.fefo-chips{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+.fefo-chips.size-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:8px;
+}
+.fefo-chip{
+  appearance:none;
+  border:1px solid #e3edf8;
+  background:#f8fbff;
+  color:#0f2748;
+  border-radius:12px;
+  padding:10px 12px;
+  font-size:12px;
+  font-weight:800;
+  cursor:pointer;
+  transition:transform .15s ease,border-color .15s ease,background .15s ease,box-shadow .15s ease;
+  text-align:center;
+}
+.fefo-chip:hover{
+  transform:translateY(-1px);
+  border-color:#bfdbfe;
+  background:#eff6ff;
+}
+.fefo-chip.is-active{
+  border-color:#5e35b1;
+  background:#5e35b1;
+  color:#fff;
+  box-shadow:0 8px 20px rgba(94,53,177,.22);
+}
+.fefo-chip.size{padding:11px 6px;font-size:13px;}
+.fefo-reset{
+  margin-top:4px;
+  align-self:flex-start;
+  border:1px solid #e3edf8;
+  background:#fff;
+  color:#64748b;
+  border-radius:10px;
+  padding:8px 12px;
+  font-size:11px;
+  font-weight:800;
+  cursor:pointer;
+  transition:color .15s ease,border-color .15s ease,background .15s ease;
+}
+.fefo-reset:hover{color:#0f2748;border-color:#c4b5fd;background:#faf5ff;}
+.fefo-live{
+  background:#fff;
+  border:1px solid #e3edf8;
+  border-radius:16px;
+  padding:16px;
+  overflow:visible;
+  box-shadow:0 8px 20px rgba(15,61,115,.05);
+}
+.fefo-waiting{
+  text-align:center;
+  padding:12px 10px;
+}
+.fefo-waiting-icon{
+  width:64px;
+  height:64px;
+  margin:0 auto 14px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:28px;
+  background:#f5f3ff;
+  border:1px solid #ddd6fe;
+  box-shadow:0 8px 20px rgba(15,61,115,.06);
+}
+.fefo-waiting h4{
+  margin:0 0 6px;
+  font-size:16px;
+  font-weight:900;
+  color:#0f2748;
+}
+.fefo-waiting p{
+  margin:0 0 14px;
+  color:#64748b;
+  font-size:13px;
+  font-weight:600;
+}
+.fefo-checklist{
+  list-style:none;
+  margin:0;
+  padding:0;
+  display:inline-flex;
+  flex-direction:column;
+  gap:6px;
+  text-align:left;
+}
+.fefo-checklist li{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:12px;
+  font-weight:700;
+  color:#94a3b8;
+}
+.fefo-checklist li.is-done{color:#059669;}
+.fefo-checklist li::before{
+  content:'○';
+  font-size:11px;
+}
+.fefo-checklist li.is-done::before{content:'✓';}
+.fefo-loading{
+  text-align:center;
+  color:#64748b;
+  font-size:13px;
+  font-weight:700;
+  padding:24px;
+}
+.fefo-empty{
+  text-align:center;
+  padding:20px 14px;
+  border-radius:14px;
+  background:#f8fafc;
+  border:1px dashed #cbd5e1;
+  color:#64748b;
+  font-size:13px;
+  font-weight:600;
+  line-height:1.55;
+}
+.fefo-hero{
+  --fefo-accent:#5e35b1;
+  --fefo-accent-soft:#f5f3ff;
+  border-radius:16px;
+  padding:16px;
+  background:#f8fbff;
+  border:1px solid #e3edf8;
+  box-shadow:0 8px 20px rgba(15,61,115,.05);
+  animation:fefoReveal .35s ease;
+}
+.fefo-hero.kind-expired{--fefo-accent:#dc2626;--fefo-accent-soft:#fef2f2;border-color:#fecaca;}
+.fefo-hero.kind-near{--fefo-accent:#c2410c;--fefo-accent-soft:#fff7ed;border-color:#fed7aa;}
+.fefo-hero.kind-ok{--fefo-accent:#059669;--fefo-accent-soft:#ecfdf5;border-color:#bbf7d0;}
+@keyframes fefoReveal{
+  from{opacity:0;transform:translateY(8px);}
+  to{opacity:1;transform:translateY(0);}
+}
+.fefo-hero-top{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:14px;
+}
+.fefo-hero-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:6px 11px;
+  border-radius:999px;
+  background:var(--fefo-accent);
+  color:#fff;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+}
+.fefo-hero-spec{
+  font-size:13px;
+  font-weight:800;
+  color:#516987;
+}
+.fefo-hero-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;
+}
+.fefo-stat-card{
+  background:#fff;
+  border:1px solid #e3edf8;
+  border-radius:14px;
+  padding:14px;
+  box-shadow:0 4px 14px rgba(15,61,115,.04);
+}
+.fefo-stat-card > small{
+  display:block;
+  font-size:10px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.04em;
+  color:#64748b;
+  margin-bottom:10px;
+}
+.fefo-stat-expiry{
+  text-align:center;
+  border-color:var(--fefo-accent);
+  background:var(--fefo-accent-soft);
+}
+.fefo-expiry-date{
+  display:block;
+  font-size:20px;
+  font-weight:900;
+  color:var(--fefo-accent);
+  line-height:1.2;
+  margin-top:8px;
+}
+.fefo-expiry-days{
+  display:block;
+  margin-top:6px;
+  font-size:12px;
+  font-weight:800;
+  color:#516987;
+}
+.fefo-expiry-days.expired{color:#dc2626;}
+.fefo-expiry-days.near{color:#c2410c;}
+.fefo-expiry-days.ok{color:#059669;}
+.fefo-ring{
+  --p:72;
+  width:96px;
+  height:96px;
+  margin:0 auto;
+  border-radius:50%;
+  background:conic-gradient(var(--fefo-accent) calc(var(--p) * 1%),#e3edf8 0);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  flex-shrink:0;
+}
+.fefo-ring::after{
+  content:'';
+  position:absolute;
+  inset:9px;
+  border-radius:50%;
+  background:#fff;
+}
+.fefo-ring-inner{
+  position:relative;
+  z-index:1;
+  width:72px;
+  height:72px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  line-height:1;
+  overflow:hidden;
+  padding:2px;
+  box-sizing:border-box;
+}
+.fefo-ring-inner strong{
+  display:block;
+  font-size:26px;
+  font-weight:900;
+  color:var(--fefo-accent);
+  max-width:100%;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.fefo-ring-inner strong.fefo-ring-qty--md{font-size:18px;}
+.fefo-ring-inner strong.fefo-ring-qty--sm{font-size:14px;}
+.fefo-ring-inner small{
+  display:block;
+  margin-top:3px;
+  font-size:8px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+  color:#64748b;
+}
+.fefo-stat-location .location-badge{
+  font-size:13px;
+  padding:8px 14px;
+}
+.fefo-stat-value{
+  display:block;
+  font-size:18px;
+  font-weight:900;
+  color:#0f2748;
+  line-height:1.25;
+}
+.fefo-stat-value.expired{color:#dc2626;}
+.fefo-stat-value.near{color:#c2410c;}
+.fefo-stat-value.ok{color:#059669;}
+.fefo-stat-sub{
+  display:block;
+  margin-top:8px;
+  font-size:12px;
+  font-weight:700;
+  color:#64748b;
+}
+.fefo-timeline-head{
+  margin:14px 0 10px;
+  font-size:11px;
+  font-weight:800;
+  color:#64748b;
+  text-transform:uppercase;
+  letter-spacing:.04em;
+}
+.fefo-timeline{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(148px,1fr));
+  gap:12px;
+  overflow:visible;
+}
+.fefo-lot-card{
+  --lot-accent:#5e35b1;
+  background:#fff;
+  border:2px solid #e3edf8;
+  border-radius:12px;
+  padding:12px 10px 10px;
+  position:relative;
+  box-shadow:0 4px 14px rgba(15,61,115,.04);
+  display:flex;
+  flex-direction:column;
+  align-items:stretch;
+  aspect-ratio:1;
+  min-width:0;
+}
+.fefo-lot-card.kind-expired{--lot-accent:#dc2626;border-color:#fecaca;}
+.fefo-lot-card.kind-near{--lot-accent:#c2410c;border-color:#fed7aa;}
+.fefo-lot-card.kind-ok{--lot-accent:#059669;border-color:#bbf7d0;}
+.fefo-lot-card.is-first{
+  border-color:#c4b5fd;
+  background:#faf5ff;
+  box-shadow:0 8px 20px rgba(94,53,177,.1);
+}
+.fefo-lot-rank{
+  position:absolute;
+  top:8px;
+  right:8px;
+  width:20px;
+  height:20px;
+  border-radius:6px;
+  background:#ede9fe;
+  color:#5e35b1;
+  font-size:9px;
+  font-weight:900;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.fefo-lot-card.is-first .fefo-lot-rank{background:#5e35b1;color:#fff;border-radius:6px;}
+.fefo-lot-body{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+  padding-right:18px;
+  min-height:0;
+}
+.fefo-lot-label{
+  display:block;
+  font-size:8px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+  color:#94a3b8;
+}
+.fefo-lot-expiry{
+  display:block;
+  font-size:12px;
+  font-weight:900;
+  color:#0f2748;
+  line-height:1.25;
+}
+.fefo-lot-location{
+  margin:2px 0;
+}
+.fefo-lot-location .location-badge{
+  font-size:10px;
+  padding:4px 8px;
+}
+.fefo-lot-days{
+  display:block;
+  font-size:10px;
+  font-weight:800;
+  color:#64748b;
+  line-height:1.3;
+}
+.fefo-lot-days.expired{color:#dc2626;}
+.fefo-lot-days.near{color:#c2410c;}
+.fefo-lot-days.ok{color:#059669;}
+.fefo-lot-qty-ring{
+  width:48px;
+  height:48px;
+  margin:6px auto 0;
+  border-radius:50%;
+  border:2px solid var(--lot-accent);
+  background:#f8fbff;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+  line-height:1;
+}
+.fefo-lot-qty-ring strong{
+  font-size:15px;
+  font-weight:900;
+  color:var(--lot-accent);
+  max-width:40px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.fefo-lot-qty-ring strong.fefo-ring-qty--md{font-size:12px;}
+.fefo-lot-qty-ring strong.fefo-ring-qty--sm{font-size:10px;}
+.fefo-lot-qty-ring small{
+  margin-top:2px;
+  font-size:7px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+  color:#64748b;
+}
+@media (max-width:900px){
+  .fefo-studio-body{grid-template-columns:1fr;}
+  .fefo-hero-grid{grid-template-columns:1fr;}
+  .fefo-timeline{grid-template-columns:1fr;}
 }
 
 @media (max-width:1100px){
@@ -3481,7 +4198,8 @@ body.entry-modal-open{
           <div class="dashboard-card dashboard-full">
             <h3>Stock Available by Item</h3>
             <p style="font-size:12px;color:#64748b;margin-bottom:12px;">Available = total received − total consumed for each item (all dates combined). Each addition adds to received; each use subtracts from consumed.</p>
-            <div class="dash-table-scroll">
+            <p class="eq-table-hint">Hover any row to see the item&apos;s current storage location.</p>
+            <div class="dash-table-scroll eq-table-scroll">
               <table class="dash-data-table">
                 <thead>
                   <tr>
@@ -3627,7 +4345,8 @@ body.entry-modal-open{
           <h2 class="dash-section-title">Important Tables</h2>
           <div class="dashboard-card dashboard-full">
             <h3>Table 1: Near Expiry Items</h3>
-            <div class="dash-table-scroll">
+            <p class="eq-table-hint">Hover any row to see where the item is stored.</p>
+            <div class="dash-table-scroll eq-table-scroll">
               <table class="dash-data-table">
                 <thead><tr><th>Item</th><th>Category</th><th>Qty</th><th>Expiry Date</th><th>Days Remaining</th></tr></thead>
                 <tbody id="dashNearExpiryBody"><tr><td colspan="5">Loading…</td></tr></tbody>
@@ -3636,7 +4355,8 @@ body.entry-modal-open{
           </div>
           <div class="dashboard-card dashboard-full">
             <h3>Table 2: Expired Items</h3>
-            <div class="dash-table-scroll">
+            <p class="eq-table-hint">Hover any row to see where the item is stored.</p>
+            <div class="dash-table-scroll eq-table-scroll">
               <table class="dash-data-table">
                 <thead><tr><th>Item</th><th>Category</th><th>Qty</th><th>Expiry Date</th><th>Status</th></tr></thead>
                 <tbody id="dashExpiredBody"><tr><td colspan="5">Loading…</td></tr></tbody>
@@ -3645,7 +4365,8 @@ body.entry-modal-open{
           </div>
           <div class="dashboard-card dashboard-full">
             <h3>Table 3: Machine Tracking</h3>
-            <div class="dash-table-scroll">
+            <p class="eq-table-hint">Hover any device row to see its current location.</p>
+            <div class="dash-table-scroll eq-table-scroll">
               <table class="dash-data-table">
                 <thead><tr><th>Machine Type</th><th>Status</th><th>Incident #</th><th>Barwa #</th><th>Date</th><th>Notes</th></tr></thead>
                 <tbody id="dashMachineBody"><tr><td colspan="6">Loading…</td></tr></tbody>
@@ -3657,7 +4378,8 @@ body.entry-modal-open{
               <h3 style="margin:0;">Table 4: Full Inventory Log</h3>
               <input type="search" id="dashLogSearch" class="dash-filter-search" placeholder="Search item, category, action…" oninput="onDashboardLogSearch()">
             </div>
-            <div class="dash-table-scroll">
+            <p class="eq-table-hint">Hover the item name to see its current location.</p>
+            <div class="dash-table-scroll eq-table-scroll">
               <table class="dash-data-table">
                 <thead><tr><th>Date</th><th>Category</th><th>Item</th><th>Action</th><th>Qty</th><th>Expiry</th><th>Validity</th><th>Incident</th><th>Barwa</th></tr></thead>
                 <tbody id="dashFullLogBody"><tr><td colspan="9">Loading…</td></tr></tbody>
@@ -3691,6 +4413,54 @@ body.entry-modal-open{
           </div>
 
           <p id="trachDashEmptyState" class="dash-empty-state" hidden>No tracheostomy dashboard data found in the sheet yet.</p>
+
+          <div class="fefo-studio" id="trachFefoPanel">
+            <div class="fefo-studio-head">
+              <div>
+                <span class="fefo-kicker">Lean · FEFO</span>
+                <h3>Smart Tube Picker</h3>
+                <p>Tap category, cuff type, and size — the nearest-expiry lot and pick location appear instantly. No search button needed.</p>
+              </div>
+              <div class="fefo-steps" id="fefoSteps" aria-hidden="true">
+                <span class="fefo-step is-active" data-step="1">1 · Category</span>
+                <span class="fefo-step" data-step="2">2 · Cuff</span>
+                <span class="fefo-step" data-step="3">3 · Size</span>
+              </div>
+            </div>
+            <div class="fefo-studio-body">
+              <div class="fefo-config">
+                <div class="fefo-chip-block">
+                  <label>Type of Tracheostomy</label>
+                  <div class="fefo-chips" id="fefoCategoryChips">
+                    <button type="button" class="fefo-chip" data-fefo="category" data-value="Neonate">Neonate</button>
+                    <button type="button" class="fefo-chip" data-fefo="category" data-value="Pediatric">Pediatric</button>
+                  </div>
+                </div>
+                <div class="fefo-chip-block">
+                  <label>Tube type</label>
+                  <div class="fefo-chips" id="fefoCuffChips">
+                    <button type="button" class="fefo-chip" data-fefo="cuff" data-value="Cuffed">Cuffed</button>
+                    <button type="button" class="fefo-chip" data-fefo="cuff" data-value="Uncuffed">Uncuffed</button>
+                  </div>
+                </div>
+                <div class="fefo-chip-block">
+                  <label>Tube size</label>
+                  <div class="fefo-chips size-grid" id="fefoSizeChips">
+                    <button type="button" class="fefo-chip size" data-fefo="size" data-value="2.5">2.5</button>
+                    <button type="button" class="fefo-chip size" data-fefo="size" data-value="3">3</button>
+                    <button type="button" class="fefo-chip size" data-fefo="size" data-value="3.5">3.5</button>
+                    <button type="button" class="fefo-chip size" data-fefo="size" data-value="4">4</button>
+                    <button type="button" class="fefo-chip size" data-fefo="size" data-value="4.5">4.5</button>
+                    <button type="button" class="fefo-chip size" data-fefo="size" data-value="5">5</button>
+                    <button type="button" class="fefo-chip size" data-fefo="size" data-value="5.5">5.5</button>
+                    <button type="button" class="fefo-chip size" data-fefo="size" data-value="6">6</button>
+                  </div>
+                </div>
+                <button type="button" class="fefo-reset" onclick="resetTrachFefo()">Clear selection</button>
+              </div>
+              <div class="fefo-live" id="trachFefoResult" aria-live="polite"></div>
+            </div>
+          </div>
 
           <div id="trachDashCaptureArea" class="trach-dash-capture-area">
             <h1 class="trach-dash-page-title trach-capture-title">Tracheostomy Dashboard</h1>
@@ -3747,7 +4517,8 @@ body.entry-modal-open{
           <div class="dashboard-card dashboard-full">
             <h3>Stock Available by Item</h3>
             <p style="font-size:12px;color:#64748b;margin-bottom:12px;">Available = total received − total consumed for each item.</p>
-            <div class="dash-table-scroll">
+            <p class="eq-table-hint">Hover any row to see the item&apos;s current storage location.</p>
+            <div class="dash-table-scroll eq-table-scroll">
               <table class="dash-data-table">
                 <thead>
                   <tr><th>Item</th><th>Category</th><th>Received</th><th>Consumed</th><th>Available</th></tr>
@@ -3762,7 +4533,8 @@ body.entry-modal-open{
               <h3 style="margin:0;">Full Inventory Log</h3>
               <input type="search" id="invLogSearch" class="dash-filter-search" placeholder="Search item, category, action…" oninput="onInventoryLogSearch()">
             </div>
-            <div class="dash-table-scroll">
+            <p class="eq-table-hint">Hover the item name to see its current location.</p>
+            <div class="dash-table-scroll eq-table-scroll">
               <table class="dash-data-table">
                 <thead>
                   <tr><th>Date</th><th>Category</th><th>Item</th><th>Action</th><th>Qty</th><th>Expiry</th><th>Validity</th><th>Incident</th><th>Barwa</th></tr>
@@ -3826,7 +4598,9 @@ body.entry-modal-open{
             </div>
           </div>
 
-          <div class="report-table-wrap" id="reportTableWrap">
+          <p class="eq-table-hint" id="reportLocationHint" hidden>Hover the item name to see its current location.</p>
+
+          <div class="report-table-wrap eq-table-scroll" id="reportTableWrap">
             <table class="report-table">
               <thead>
                 <tr>
@@ -3892,7 +4666,8 @@ body.entry-modal-open{
 
           <div class="dashboard-card dashboard-full">
             <h3>Machine Tracking</h3>
-            <div class="dash-table-scroll">
+            <p class="eq-table-hint">Hover any device row to see its current location.</p>
+            <div class="dash-table-scroll eq-table-scroll">
               <table class="dash-data-table">
                 <thead>
                   <tr><th>Machine Type</th><th>Status</th><th>Incident #</th><th>Barwa #</th><th>Date</th><th>Notes</th></tr>
@@ -3929,32 +4704,41 @@ body.entry-modal-open{
             <div class="dash-summary-card"><small>Zero Available</small><strong id="alertZeroStock">0</strong></div>
           </div>
 
+          <div class="dashboard-card dashboard-full alert-location-panel" id="alertLocationPanel" hidden>
+            <h3><span aria-hidden="true">📍</span> Current Item Locations</h3>
+            <p class="chart-subtitle">Where alert items are currently stored — based on the latest recorded location for each item.</p>
+            <div class="alert-location-grid" id="alertLocationGrid"></div>
+          </div>
+
           <div class="dashboard-card dashboard-full">
             <h3>Near Expiry Items</h3>
-            <div class="dash-table-scroll">
+            <p class="eq-table-hint">Hover any row to see where the item is stored.</p>
+            <div class="dash-table-scroll eq-table-scroll">
               <table class="dash-data-table">
-                <thead><tr><th>Item</th><th>Category</th><th>Qty</th><th>Expiry Date</th><th>Days Remaining</th></tr></thead>
-                <tbody id="alertNearExpiryBody"><tr><td colspan="5">Loading…</td></tr></tbody>
+                <thead><tr><th>Item</th><th>Category</th><th>Location</th><th>Qty</th><th>Expiry Date</th><th>Days Remaining</th></tr></thead>
+                <tbody id="alertNearExpiryBody"><tr><td colspan="6">Loading…</td></tr></tbody>
               </table>
             </div>
           </div>
 
           <div class="dashboard-card dashboard-full">
             <h3>Expired Items</h3>
-            <div class="dash-table-scroll">
+            <p class="eq-table-hint">Hover any row to see where the item is stored.</p>
+            <div class="dash-table-scroll eq-table-scroll">
               <table class="dash-data-table">
-                <thead><tr><th>Item</th><th>Category</th><th>Qty</th><th>Expiry Date</th><th>Status</th></tr></thead>
-                <tbody id="alertExpiredBody"><tr><td colspan="5">Loading…</td></tr></tbody>
+                <thead><tr><th>Item</th><th>Category</th><th>Location</th><th>Qty</th><th>Expiry Date</th><th>Status</th></tr></thead>
+                <tbody id="alertExpiredBody"><tr><td colspan="6">Loading…</td></tr></tbody>
               </table>
             </div>
           </div>
 
           <div class="dashboard-card dashboard-full">
             <h3>Stock Warnings (Low or Negative Available)</h3>
-            <div class="dash-table-scroll">
+            <p class="eq-table-hint">Hover any row to see the item&apos;s current storage location.</p>
+            <div class="dash-table-scroll eq-table-scroll">
               <table class="dash-data-table">
-                <thead><tr><th>Item</th><th>Category</th><th>Received</th><th>Consumed</th><th>Available</th></tr></thead>
-                <tbody id="alertStockBody"><tr><td colspan="5">Loading…</td></tr></tbody>
+                <thead><tr><th>Item</th><th>Category</th><th>Location</th><th>Received</th><th>Consumed</th><th>Available</th></tr></thead>
+                <tbody id="alertStockBody"><tr><td colspan="6">Loading…</td></tr></tbody>
               </table>
             </div>
           </div>
@@ -4258,7 +5042,9 @@ body.entry-modal-open{
       machine: ['select machine', 'machine', 'machine name', 'device'],
       machineType: ['machine type', 'device type', 'select machine type'],
       machineStatus: ['machine status', 'device status', 'return status', 'status of machine'],
-      notes: ['notes', 'remarks', 'comments']
+      notes: ['notes', 'remarks', 'comments'],
+      itemWhere: ['where', 'item location', 'storage location', 'item where', 'current location'],
+      deviceLocation: ['where is the device', 'device location', 'device where']
     };
 
     const defaultCriticalInventoryResponses = [
@@ -4401,6 +5187,8 @@ body.entry-modal-open{
         date: pickSheetField(rawRow, 'date'),
         category: pickSheetField(rawRow, 'category'),
         item: buildItemNameFromSheetRow(rawRow),
+        trachTypeCategory: pickItemColumnValue(rawRow, ['type of the tracheostomy']),
+        trachCuffType: pickItemColumnValue(rawRow, ['what is the tracheostomy tube type']),
         trachTubeType: pickTrachSubField(rawRow, ['what is the tracheostomy tube type', 'type of the tracheostomy']),
         trachTubeSize: pickTrachSubField(rawRow, ['what is the tracheostomy tube size']),
         action: action,
@@ -4415,7 +5203,9 @@ body.entry-modal-open{
         machine: pickSheetField(rawRow, 'machine') || pickSheetField(rawRow, 'machineType'),
         machineType: pickSheetField(rawRow, 'machineType') || pickSheetField(rawRow, 'machine'),
         machineStatus: pickSheetField(rawRow, 'machineStatus'),
-        notes: pickSheetField(rawRow, 'notes')
+        notes: pickSheetField(rawRow, 'notes'),
+        itemWhere: pickSheetField(rawRow, 'itemWhere'),
+        deviceLocation: pickSheetField(rawRow, 'deviceLocation')
       };
 
       const hasContent = row.category || row.action || row.item;
@@ -5812,21 +6602,23 @@ body.entry-modal-open{
         return hay.includes(search);
       });
 
+      const locationMaps = getDashboardLocationMaps(getReportRows());
+
       setTableBody('dashNearExpiryBody', nearRows, function(row){
         const days = daysRemaining(row.expiryDate);
-        return '<tr><td>' + escapeReportText(formatItemLabel(row)) + '</td><td>' + escapeReportText(row.category || '—') + '</td><td>' + escapeReportText(row.quantity ?? '—') + '</td><td>' + escapeReportText(row.expiryDate || '—') + '</td><td>' + (days == null ? '—' : days + ' days') + '</td></tr>';
+        return renderExpiryItemRow(row, locationMaps, days);
       }, 5);
 
       setTableBody('dashExpiredBody', expiredRows, function(row){
-        return '<tr><td>' + escapeReportText(formatItemLabel(row)) + '</td><td>' + escapeReportText(row.category || '—') + '</td><td>' + escapeReportText(row.quantity ?? '—') + '</td><td>' + escapeReportText(row.expiryDate || '—') + '</td><td>' + escapeReportText(row.validity || 'Expired') + '</td></tr>';
+        return renderExpiryItemRow(row, locationMaps, null, row.validity || 'Expired');
       }, 5);
 
       setTableBody('dashMachineBody', machineRows, function(row){
-        return '<tr><td>' + escapeReportText(getMachineType(row) || row.machine || '—') + '</td><td>' + escapeReportText(row.machineStatus || row.action || '—') + '</td><td>' + escapeReportText(row.incidentNumber || '—') + '</td><td>' + escapeReportText(row.barwaNumber || '—') + '</td><td>' + escapeReportText(row.date || '—') + '</td><td>' + escapeReportText(row.notes || '—') + '</td></tr>';
+        return renderMachineTableRow(row, locationMaps);
       }, 6);
 
       setTableBody('dashFullLogBody', logRows, function(row){
-        return '<tr><td>' + escapeReportText(row.date || '—') + '</td><td>' + escapeReportText(row.category || '—') + '</td><td>' + escapeReportText(formatItemLabel(row)) + '</td><td>' + escapeReportText(row.action || '—') + '</td><td>' + escapeReportText(row.quantity ?? '—') + '</td><td>' + escapeReportText(row.expiryDate || '—') + '</td><td>' + escapeReportText(row.validity || '—') + '</td><td>' + escapeReportText(row.incidentNumber || '—') + '</td><td>' + escapeReportText(row.barwaNumber || '—') + '</td></tr>';
+        return renderInventoryLogRow(row, locationMaps);
       }, 9);
     }
 
@@ -5982,7 +6774,7 @@ body.entry-modal-open{
       });
     }
 
-    function renderItemStockTable(itemStockList, bodyId){
+    function renderItemStockTable(itemStockList, bodyId, locationMaps){
       const body = document.getElementById(bodyId || 'dashItemStockBody');
       if(!body) return;
       const card = body.closest('.dashboard-card');
@@ -5992,10 +6784,19 @@ body.entry-modal-open{
         body.innerHTML = '';
         return;
       }
+      const maps = locationMaps || getDashboardLocationMaps();
       body.innerHTML = itemStockList.map(function(entry){
-            const balanceClass = entry.balance < 0 ? ' style="color:#dc2626;font-weight:800;"' : (entry.balance === 0 ? '' : ' style="color:#059669;font-weight:800;"');
-            return '<tr><td>' + escapeReportText(entry.label) + '</td><td>' + escapeReportText(entry.category) + '</td><td>' + entry.received + '</td><td>' + entry.consumed + '</td><td' + balanceClass + '>' + entry.balance + '</td></tr>';
-          }).join('');
+        const parts = getStockEntryLocationParts(entry, maps);
+        const h = hoverRowAttributes(parts);
+        const balanceClass = entry.balance < 0 ? ' style="color:#dc2626;font-weight:800;"' : (entry.balance === 0 ? '' : ' style="color:#059669;font-weight:800;"');
+        return h.open +
+          renderLocationHoverCell(escapeReportText(entry.label), parts) +
+          '<td>' + escapeReportText(entry.category) + '</td>' +
+          '<td>' + entry.received + '</td>' +
+          '<td>' + entry.consumed + '</td>' +
+          '<td' + balanceClass + '>' + entry.balance + '</td>' +
+        '</tr>';
+      }).join('');
     }
 
     function buildItemStockList(stockRows){
@@ -6112,9 +6913,10 @@ body.entry-modal-open{
 
       if(!hasData) return;
 
-      renderItemStockTable(stockList, 'invStockBody');
+      const locationMaps = getDashboardLocationMaps(allRows);
+      renderItemStockTable(stockList, 'invStockBody', locationMaps);
       setTableBody('invLogBody', logRows, function(row){
-        return '<tr><td>' + escapeReportText(row.date || '—') + '</td><td>' + escapeReportText(row.category || '—') + '</td><td>' + escapeReportText(formatItemLabel(row)) + '</td><td>' + escapeReportText(row.action || '—') + '</td><td>' + escapeReportText(row.quantity ?? '—') + '</td><td>' + escapeReportText(row.expiryDate || '—') + '</td><td>' + escapeReportText(row.validity || '—') + '</td><td>' + escapeReportText(row.incidentNumber || '—') + '</td><td>' + escapeReportText(row.barwaNumber || '—') + '</td></tr>';
+        return renderInventoryLogRow(row, locationMaps);
       }, 9);
     }
 
@@ -6164,8 +6966,9 @@ body.entry-modal-open{
       const eqChartsGrid = document.querySelector('#equipmentSection .dashboard-charts-grid');
       if(eqChartsGrid) eqChartsGrid.hidden = false;
 
+      const locationMaps = getDashboardLocationMaps(allRows);
       setTableBody('eqMachineBody', machineRows, function(row){
-        return '<tr><td>' + escapeReportText(getMachineType(row) || row.machine || '—') + '</td><td>' + escapeReportText(row.machineStatus || row.action || '—') + '</td><td>' + escapeReportText(row.incidentNumber || '—') + '</td><td>' + escapeReportText(row.barwaNumber || '—') + '</td><td>' + escapeReportText(row.date || '—') + '</td><td>' + escapeReportText(row.notes || '—') + '</td></tr>';
+        return renderMachineTableRow(row, locationMaps);
       }, 6);
 
       if(typeof Chart !== 'undefined'){
@@ -6190,13 +6993,16 @@ body.entry-modal-open{
         });
         ['alertNearExpiryBody','alertExpiredBody','alertStockBody'].forEach(function(id){
           const body = document.getElementById(id);
-          if(body) body.innerHTML = '<tr><td colspan="5">Loading…</td></tr>';
+          if(body) body.innerHTML = '<tr><td colspan="6">Loading…</td></tr>';
         });
+        const locGrid = document.getElementById('alertLocationGrid');
+        if(locGrid) locGrid.innerHTML = '';
         return;
       }
 
       const allRows = getReportRows();
       const stockList = buildItemStockList(allRows);
+      const locationMaps = getDashboardLocationMaps(allRows);
       const analytics = computeDashboardAnalytics(allRows, allRows);
       const nearRows = allRows.filter(function(row){ return getValidityKind(row) === 'near'; })
         .sort(function(a, b){ return (daysRemaining(a.expiryDate) ?? 9999) - (daysRemaining(b.expiryDate) ?? 9999); });
@@ -6218,16 +7024,46 @@ body.entry-modal-open{
       setBlockVisible('alertEmptyState', !hasAlerts);
       setBlockVisible('alertSummaryGrid', hasAlerts);
 
+      const alertLocationItems = [];
+      nearRows.forEach(function(row){
+        alertLocationItems.push({
+          key: getStockItemKey(row),
+          label: formatItemLabel(row),
+          location: formatEquipmentLocationLabel(getRowLocationParts(row, locationMaps)),
+          tag: 'Near Expiry',
+          tagClass: 'near'
+        });
+      });
+      expiredRows.forEach(function(row){
+        alertLocationItems.push({
+          key: getStockItemKey(row),
+          label: formatItemLabel(row),
+          location: formatEquipmentLocationLabel(getRowLocationParts(row, locationMaps)),
+          tag: 'Expired',
+          tagClass: 'expired'
+        });
+      });
+      warnStock.forEach(function(item){
+        alertLocationItems.push({
+          key: item.key,
+          label: item.label,
+          location: formatEquipmentLocationLabel(getStockEntryLocationParts(item, locationMaps)),
+          tag: item.balance < 0 ? 'Negative Stock' : 'Zero Stock',
+          tagClass: 'stock'
+        });
+      });
+      renderAlertLocationPanel(alertLocationItems);
+
       setTableBody('alertNearExpiryBody', nearRows, function(row){
         const days = daysRemaining(row.expiryDate);
-        return '<tr><td>' + escapeReportText(formatItemLabel(row)) + '</td><td>' + escapeReportText(row.category || '—') + '</td><td>' + escapeReportText(row.quantity ?? '—') + '</td><td>' + escapeReportText(row.expiryDate || '—') + '</td><td>' + (days == null ? '—' : days + ' days') + '</td></tr>';
-      }, 5);
+        return renderAlertItemRow(row, locationMaps, days);
+      }, 6);
 
       setTableBody('alertExpiredBody', expiredRows, function(row){
-        return '<tr><td>' + escapeReportText(formatItemLabel(row)) + '</td><td>' + escapeReportText(row.category || '—') + '</td><td>' + escapeReportText(row.quantity ?? '—') + '</td><td>' + escapeReportText(row.expiryDate || '—') + '</td><td>' + escapeReportText(row.validity || 'Expired') + '</td></tr>';
-      }, 5);
+        return renderAlertItemRow(row, locationMaps, null, row.validity || 'Expired');
+      }, 6);
 
-      renderItemStockTable(warnStock, 'alertStockBody');
+      renderAlertStockTable(warnStock, locationMaps, 'alertStockBody');
     }
 
     async function loadAndRenderAlertsPage(){
@@ -6238,7 +7074,10 @@ body.entry-modal-open{
 
     function rerenderActivePage(){
       if(activeAppPage === 'overview') renderDashboard(false);
-      else if(activeAppPage === 'tracheostomy') renderTrachDashboard(false);
+      else if(activeAppPage === 'tracheostomy'){
+        renderTrachDashboard(false);
+        renderTrachFefoPanel(false);
+      }
       else if(activeAppPage === 'inventory') renderInventoryPage(false);
       else if(activeAppPage === 'reports') renderInventoryReport(false);
       else if(activeAppPage === 'equipment') renderEquipmentPage(false);
@@ -6247,8 +7086,12 @@ body.entry-modal-open{
 
     async function refreshActivePageFromSheet(){
       if(activeAppPage === 'tracheostomy'){
-        await loadTrachDashboardFromSheet(true);
+        await Promise.all([
+          loadTrachDashboardFromSheet(true),
+          loadReportFromGoogleSheet(true)
+        ]);
         renderTrachDashboard(false);
+        renderTrachFefoPanel(false);
         return;
       }
       await loadReportFromGoogleSheet(true);
@@ -6578,9 +7421,290 @@ body.entry-modal-open{
 
     async function loadAndRenderTrachDashboard(){
       renderTrachDashboard(true);
-      await loadTrachDashboardFromSheet(false);
+      renderTrachFefoPanel(true);
+      await Promise.all([
+        loadTrachDashboardFromSheet(false),
+        loadReportFromGoogleSheet(false)
+      ]);
       renderTrachDashboard(false);
+      renderTrachFefoPanel(false);
     }
+
+    function parseTrachTubeSpecs(row){
+      let category = String(row.trachTypeCategory || '').trim();
+      let cuff = String(row.trachCuffType || '').trim();
+      const combined = String(row.trachTubeType || '').toLowerCase();
+      if(!category){
+        if(combined.includes('neonate')) category = 'Neonate';
+        else if(combined.includes('pediatric') || combined.includes('paed')) category = 'Pediatric';
+      }
+      if(!cuff){
+        if(combined.includes('uncuffed') || combined.includes('cuffless')) cuff = 'Uncuffed';
+        else if(combined.includes('cuffed')) cuff = 'Cuffed';
+      }
+      if(cuff){
+        const cuffLower = cuff.toLowerCase();
+        if(cuffLower.includes('uncuffed') || cuffLower.includes('cuffless')) cuff = 'Uncuffed';
+        else if(cuffLower.includes('cuffed')) cuff = 'Cuffed';
+      }
+      if(category){
+        const catLower = category.toLowerCase();
+        if(catLower.includes('neonate')) category = 'Neonate';
+        else if(catLower.includes('pediatric') || catLower.includes('paed')) category = 'Pediatric';
+      }
+      return {
+        category: category,
+        cuff: cuff,
+        size: String(row.trachTubeSize || '').trim()
+      };
+    }
+
+    function trachSpecsMatchRow(row, category, cuff, size){
+      if(!isTrachTubeRow(row)) return false;
+      const specs = parseTrachTubeSpecs(row);
+      if(category && specs.category.toLowerCase() !== category.toLowerCase()) return false;
+      if(cuff && specs.cuff.toLowerCase() !== cuff.toLowerCase()) return false;
+      if(size && specs.size !== size) return false;
+      return true;
+    }
+
+    function findTrachFefoLots(rows, category, cuff, size){
+      const lots = [];
+      rows.forEach(function(row){
+        if(!trachSpecsMatchRow(row, category, cuff, size)) return;
+        if(!isRowReceived(row)) return;
+        const qty = rowStockQty(row);
+        if(qty <= 0) return;
+        const exp = parseReportDate(row.expiryDate);
+        if(!exp) return;
+        const days = daysRemaining(row.expiryDate);
+        const kind = getValidityKind(row);
+        lots.push({
+          row: row,
+          expiryDate: row.expiryDate,
+          expiry: exp,
+          days: days,
+          qty: qty,
+          location: row.itemWhere || '',
+          validity: row.validity || '',
+          kind: kind,
+          label: formatItemLabel(row),
+          specs: parseTrachTubeSpecs(row),
+          receivedDate: row.date || ''
+        });
+      });
+      lots.sort(function(a, b){
+        return a.expiry - b.expiry;
+      });
+      return lots;
+    }
+
+    function formatTrachFefoDaysLabel(days, kind){
+      if(days == null) return '—';
+      if(kind === 'expired') return Math.abs(days) + ' days ago (expired)';
+      if(days === 0) return 'Expires today';
+      if(days === 1) return '1 day left';
+      return days + ' days left';
+    }
+
+    function getTrachFefoValidityClass(kind){
+      if(kind === 'expired') return 'expired';
+      if(kind === 'near') return 'near';
+      return 'ok';
+    }
+
+    const trachFefoState = { category:'', cuff:'', size:'' };
+
+    function readTrachFefoFilters(){
+      return {
+        category: trachFefoState.category || '',
+        cuff: trachFefoState.cuff || '',
+        size: trachFefoState.size || ''
+      };
+    }
+
+    function getFefoUrgencyPercent(days, kind){
+      if(kind === 'expired') return 96;
+      if(days == null) return 12;
+      return Math.max(12, Math.min(92, 100 - (Math.max(0, days) / 180) * 88));
+    }
+
+    function getFefoRingDaysValue(days, kind){
+      if(kind === 'expired' && days != null) return Math.abs(days);
+      if(days == null) return '—';
+      return Math.max(0, days);
+    }
+
+    function getFefoRingQtyClass(qty){
+      const text = String(qty ?? '');
+      if(text.length >= 4) return 'fefo-ring-qty--sm';
+      if(text.length >= 3) return 'fefo-ring-qty--md';
+      return '';
+    }
+
+    function syncFefoChipUI(){
+      document.querySelectorAll('.fefo-chip').forEach(function(chip){
+        const field = chip.dataset.fefo;
+        const value = chip.dataset.value;
+        chip.classList.toggle('is-active', trachFefoState[field] === value);
+      });
+    }
+
+    function updateFefoSteps(){
+      const steps = document.querySelectorAll('.fefo-step');
+      if(!steps.length) return;
+      const progress = !trachFefoState.category ? 0 : !trachFefoState.cuff ? 1 : !trachFefoState.size ? 2 : 3;
+      steps.forEach(function(step, index){
+        step.classList.toggle('is-done', index < progress);
+        step.classList.toggle('is-active', index === progress);
+      });
+    }
+
+    function renderTrachFefoPlaceholder(filters){
+      const box = document.getElementById('trachFefoResult');
+      if(!box) return;
+      const doneCategory = !!filters.category;
+      const doneCuff = !!filters.cuff;
+      const doneSize = !!filters.size;
+      const nextHint = !doneCategory ? 'Start with patient category' : !doneCuff ? 'Choose cuffed or uncuffed' : !doneSize ? 'Pick the tube size' : '';
+      box.innerHTML = '<div class="fefo-waiting">' +
+        '<div class="fefo-waiting-icon" aria-hidden="true">🧭</div>' +
+        '<h4>Configure your tube</h4>' +
+        '<p>' + escapeReportText(nextHint || 'All set — loading pick…') + '</p>' +
+        '<ul class="fefo-checklist">' +
+          '<li class="' + (doneCategory ? 'is-done' : '') + '">Category' + (doneCategory ? ' · ' + escapeReportText(filters.category) : '') + '</li>' +
+          '<li class="' + (doneCuff ? 'is-done' : '') + '">Cuff type' + (doneCuff ? ' · ' + escapeReportText(filters.cuff) : '') + '</li>' +
+          '<li class="' + (doneSize ? 'is-done' : '') + '">Size' + (doneSize ? ' · ' + escapeReportText(filters.size) : '') + '</li>' +
+        '</ul></div>';
+    }
+
+    function renderTrachFefoResult(lots, filters){
+      const box = document.getElementById('trachFefoResult');
+      if(!box) return;
+
+      if(!filters.category || !filters.cuff || !filters.size){
+        renderTrachFefoPlaceholder(filters);
+        return;
+      }
+
+      const specLabel = filters.category + ' · ' + filters.cuff + ' · ' + filters.size;
+      if(!lots.length){
+        box.innerHTML = '<div class="fefo-empty">No received lots with expiry for <strong>' + escapeReportText(specLabel) + '</strong>. Add stock via the form and include expiry + location (<em>where</em>).</div>';
+        return;
+      }
+
+      const pick = lots[0];
+      const pickDaysClass = getTrachFefoValidityClass(pick.kind);
+      const ringPct = getFefoUrgencyPercent(pick.days, pick.kind);
+      const qtyClass = getFefoRingQtyClass(pick.qty);
+      const statusLabel = pick.validity || (pick.kind === 'expired' ? 'Expired' : pick.kind === 'near' ? 'Near Expiry' : 'Valid');
+      let html = '<div class="fefo-hero kind-' + pick.kind + '">' +
+        '<div class="fefo-hero-top">' +
+          '<span class="fefo-hero-badge">Pick this lot first</span>' +
+          '<span class="fefo-hero-spec">' + escapeReportText(specLabel) + '</span>' +
+        '</div>' +
+        '<div class="fefo-hero-grid">' +
+          '<div class="fefo-stat-card fefo-stat-expiry">' +
+            '<small>Expiry — use first</small>' +
+            '<div class="fefo-ring" style="--p:' + ringPct + '">' +
+              '<div class="fefo-ring-inner"><strong class="' + qtyClass + '">' + escapeReportText(String(pick.qty)) + '</strong><small>Qty</small></div>' +
+            '</div>' +
+            '<span class="fefo-expiry-date">' + escapeReportText(pick.expiryDate) + '</span>' +
+            '<span class="fefo-expiry-days ' + pickDaysClass + '">' + escapeReportText(formatTrachFefoDaysLabel(pick.days, pick.kind)) + '</span>' +
+          '</div>' +
+          '<div class="fefo-stat-card fefo-stat-location">' +
+            '<small>Go to location</small>' +
+            (pick.location ? renderLocationBadge(pick.location) : '<span class="location-badge loc-unknown"><span class="location-badge-icon" aria-hidden="true">📍</span>Not recorded</span>') +
+            (pick.receivedDate ? '<span class="fefo-stat-sub">Received ' + escapeReportText(pick.receivedDate) + '</span>' : '') +
+          '</div>' +
+          '<div class="fefo-stat-card">' +
+            '<small>Status</small>' +
+            '<span class="fefo-stat-value ' + pickDaysClass + '">' + escapeReportText(statusLabel) + '</span>' +
+            '<span class="fefo-stat-sub">' + escapeReportText(formatTrachFefoDaysLabel(pick.days, pick.kind)) + '</span>' +
+          '</div>' +
+        '</div></div>';
+
+      if(lots.length > 1){
+        html += '<div class="fefo-timeline-head">Other lots · earliest first (' + lots.length + ')</div>' +
+          '<div class="fefo-timeline">';
+        lots.forEach(function(lot, index){
+          const cls = getTrachFefoValidityClass(lot.kind);
+          const lotQtyClass = getFefoRingQtyClass(lot.qty);
+          html += '<article class="fefo-lot-card kind-' + lot.kind + (index === 0 ? ' is-first' : '') + '">' +
+            '<span class="fefo-lot-rank">' + (index + 1) + '</span>' +
+            '<div class="fefo-lot-body">' +
+              '<span class="fefo-lot-label">Expiry</span>' +
+              '<strong class="fefo-lot-expiry">' + escapeReportText(lot.expiryDate) + '</strong>' +
+              '<div class="fefo-lot-location">' + renderLocationBadge(lot.location) + '</div>' +
+              '<span class="fefo-lot-days ' + cls + '">' + escapeReportText(formatTrachFefoDaysLabel(lot.days, lot.kind)) + '</span>' +
+            '</div>' +
+            '<div class="fefo-lot-qty-ring" title="Quantity">' +
+              '<strong class="' + lotQtyClass + '">' + escapeReportText(String(lot.qty)) + '</strong>' +
+              '<small>Qty</small>' +
+            '</div>' +
+          '</article>';
+        });
+        html += '</div>';
+      }
+
+      box.innerHTML = html;
+    }
+
+    function searchTrachFefoLive(){
+      const filters = readTrachFefoFilters();
+      updateFefoSteps();
+      if(!filters.category || !filters.cuff || !filters.size){
+        renderTrachFefoPlaceholder(filters);
+        return;
+      }
+      const lots = findTrachFefoLots(getReportRows(), filters.category, filters.cuff, filters.size);
+      renderTrachFefoResult(lots, filters);
+    }
+
+    function onFefoChipClick(chip){
+      const field = chip.dataset.fefo;
+      const value = chip.dataset.value;
+      if(!field || !value) return;
+      trachFefoState[field] = trachFefoState[field] === value ? '' : value;
+      syncFefoChipUI();
+      searchTrachFefoLive();
+    }
+
+    function initTrachFefoChips(){
+      document.querySelectorAll('.fefo-chip').forEach(function(chip){
+        if(chip.dataset.fefoBound === '1') return;
+        chip.dataset.fefoBound = '1';
+        chip.addEventListener('click', function(){ onFefoChipClick(chip); });
+      });
+      syncFefoChipUI();
+      renderTrachFefoPlaceholder(readTrachFefoFilters());
+    }
+
+    function resetTrachFefo(){
+      trachFefoState.category = '';
+      trachFefoState.cuff = '';
+      trachFefoState.size = '';
+      syncFefoChipUI();
+      searchTrachFefoLive();
+    }
+
+    function renderTrachFefoPanel(isLoading){
+      const box = document.getElementById('trachFefoResult');
+      if(!box) return;
+      initTrachFefoChips();
+      if(isLoading){
+        box.innerHTML = '<p class="fefo-loading">Syncing inventory lots…</p>';
+        return;
+      }
+      searchTrachFefoLive();
+    }
+
+    function searchTrachFefo(){
+      searchTrachFefoLive();
+    }
+
+    window.searchTrachFefo = searchTrachFefo;
+    window.resetTrachFefo = resetTrachFefo;
 
     function renderDashboardSummary(analytics){
       const s = analytics.summary;
@@ -6642,7 +7766,7 @@ body.entry-modal-open{
       const analytics = computeDashboardAnalytics(filteredRows, stockRows);
 
       renderDashboardSummary(analytics);
-      renderItemStockTable(analytics.itemStockList);
+      renderItemStockTable(analytics.itemStockList, 'dashItemStockBody', getDashboardLocationMaps(allRows));
       renderDashboardCharts(analytics);
       renderDashboardTables(filteredRows);
       refreshSectionTitles('overviewSection');
@@ -6814,42 +7938,48 @@ body.entry-modal-open{
       const filteredRows = applyDashboardFilters(allRows);
       const stockRows = applyDashboardFilters(allRows, { forStockBalance: true });
       const analytics = computeDashboardAnalytics(filteredRows, stockRows);
+      const locationMaps = getDashboardLocationMaps(allRows);
       const sections = [];
 
       pushExportSection(sections, 'dashItemStockBody', 'Stock Available by Item',
-        ['Item', 'Category', 'Received', 'Consumed', 'Available'],
+        ['Item', 'Category', 'Location', 'Received', 'Consumed', 'Available'],
         analytics.itemStockList.map(function(item){
-          return [item.label, item.category, item.received, item.consumed, item.balance];
+          const loc = formatEquipmentLocationLabel(getStockEntryLocationParts(item, locationMaps));
+          return [item.label, item.category, loc, item.received, item.consumed, item.balance];
         }));
 
       const nearRows = filteredRows.filter(function(row){ return getValidityKind(row) === 'near'; })
         .sort(function(a, b){ return (daysRemaining(a.expiryDate) ?? 9999) - (daysRemaining(b.expiryDate) ?? 9999); });
       pushExportSection(sections, 'dashNearExpiryBody', 'Near Expiry Items',
-        ['Item', 'Category', 'Qty', 'Expiry Date', 'Days Remaining'],
+        ['Item', 'Category', 'Location', 'Qty', 'Expiry Date', 'Days Remaining'],
         nearRows.map(function(row){
           const days = daysRemaining(row.expiryDate);
-          return [formatItemLabel(row), row.category || '', row.quantity ?? '', row.expiryDate || '', days == null ? '' : days];
+          const loc = formatEquipmentLocationLabel(getRowLocationParts(row, locationMaps));
+          return [formatItemLabel(row), row.category || '', loc, row.quantity ?? '', row.expiryDate || '', days == null ? '' : days];
         }));
 
       const expiredRows = filteredRows.filter(function(row){ return getValidityKind(row) === 'expired'; });
       pushExportSection(sections, 'dashExpiredBody', 'Expired Items',
-        ['Item', 'Category', 'Qty', 'Expiry Date', 'Status'],
+        ['Item', 'Category', 'Location', 'Qty', 'Expiry Date', 'Status'],
         expiredRows.map(function(row){
-          return [formatItemLabel(row), row.category || '', row.quantity ?? '', row.expiryDate || '', row.validity || 'Expired'];
+          const loc = formatEquipmentLocationLabel(getRowLocationParts(row, locationMaps));
+          return [formatItemLabel(row), row.category || '', loc, row.quantity ?? '', row.expiryDate || '', row.validity || 'Expired'];
         }));
 
       const machineRows = filteredRows.filter(isMachineRow);
       pushExportSection(sections, 'dashMachineBody', 'Machine Tracking',
-        ['Machine Type', 'Status', 'Incident #', 'Barwa #', 'Date', 'Notes'],
+        ['Machine Type', 'Status', 'Location', 'Incident #', 'Barwa #', 'Date', 'Notes'],
         machineRows.map(function(row){
-          return [getMachineType(row) || row.machine || '', row.machineStatus || row.action || '', row.incidentNumber || '', row.barwaNumber || '', row.date || '', row.notes || ''];
+          const loc = formatEquipmentLocationLabel(getRowLocationParts(row, locationMaps));
+          return [getMachineType(row) || row.machine || '', row.machineStatus || row.action || '', loc, row.incidentNumber || '', row.barwaNumber || '', row.date || '', row.notes || ''];
         }));
 
       const logRows = getDashboardFilteredLogRows(filteredRows);
       pushExportSection(sections, 'dashFullLogBody', 'Filtered Inventory Log',
-        ['Date', 'Category', 'Item', 'Action', 'Qty', 'Expiry Date', 'Validity', 'Incident #', 'Barwa #'],
+        ['Date', 'Category', 'Item', 'Location', 'Action', 'Qty', 'Expiry Date', 'Validity', 'Incident #', 'Barwa #'],
         logRows.map(function(row){
-          return [row.date || '', row.category || '', formatItemLabel(row), row.action || '', row.quantity ?? '', row.expiryDate || '', row.validity || '', row.incidentNumber || '', row.barwaNumber || ''];
+          const loc = formatEquipmentLocationLabel(getRowLocationParts(row, locationMaps));
+          return [row.date || '', row.category || '', formatItemLabel(row), loc, row.action || '', row.quantity ?? '', row.expiryDate || '', row.validity || '', row.incidentNumber || '', row.barwaNumber || ''];
         }));
 
       return sections;
@@ -6861,42 +7991,51 @@ body.entry-modal-open{
       const allRows = getReportRows();
       const stockList = buildItemStockList(getInventoryStockRows(allRows));
       const logRows = getInventoryLogRows(allRows);
+      const locationMaps = getDashboardLocationMaps(allRows);
       const sections = [];
 
       pushExportSection(sections, 'invStockBody', 'Stock Available by Item',
-        ['Item', 'Category', 'Received', 'Consumed', 'Available'],
+        ['Item', 'Category', 'Location', 'Received', 'Consumed', 'Available'],
         stockList.map(function(item){
-          return [item.label, item.category, item.received, item.consumed, item.balance];
+          const loc = formatEquipmentLocationLabel(getStockEntryLocationParts(item, locationMaps));
+          return [item.label, item.category, loc, item.received, item.consumed, item.balance];
         }));
 
       pushExportSection(sections, 'invLogBody', 'Full Inventory Log',
-        ['Date', 'Category', 'Item', 'Action', 'Qty', 'Expiry Date', 'Validity', 'Incident #', 'Barwa #'],
+        ['Date', 'Category', 'Item', 'Location', 'Action', 'Qty', 'Expiry Date', 'Validity', 'Incident #', 'Barwa #'],
         logRows.map(function(row){
-          return [row.date || '', row.category || '', formatItemLabel(row), row.action || '', row.quantity ?? '', row.expiryDate || '', row.validity || '', row.incidentNumber || '', row.barwaNumber || ''];
+          const loc = formatEquipmentLocationLabel(getRowLocationParts(row, locationMaps));
+          return [row.date || '', row.category || '', formatItemLabel(row), loc, row.action || '', row.quantity ?? '', row.expiryDate || '', row.validity || '', row.incidentNumber || '', row.barwaNumber || ''];
         }));
 
       return sections;
     }
 
     function buildReportsExportSections(){
-      const rows = getFilteredReportRows(getReportRows());
+      const allRows = getReportRows();
+      const rows = getFilteredReportRows(allRows);
+      const locationMaps = getDashboardLocationMaps(allRows);
       const sections = [];
       pushExportSection(sections, 'inventoryReportBody', 'PHDU Critical Items Report',
-        ['Date', 'Category', 'Item', 'Action', 'Stock / Usage', 'Qty', 'Expiry Date', 'Validity'],
+        ['Date', 'Category', 'Item', 'Location', 'Action', 'Stock / Usage', 'Qty', 'Expiry Date', 'Validity'],
         rows.map(function(row){
           const badge = getValidityBadge(row.validity);
-          return [row.date || '', row.category || '', formatItemLabel(row), row.action || '', getStockUsageLabel(row), row.quantity ?? '', row.expiryDate || '', badge.text];
+          const loc = formatEquipmentLocationLabel(getRowLocationParts(row, locationMaps));
+          return [row.date || '', row.category || '', formatItemLabel(row), loc, row.action || '', getStockUsageLabel(row), row.quantity ?? '', row.expiryDate || '', badge.text];
         }));
       return sections;
     }
 
     function buildEquipmentExportSections(){
-      const machineRows = getReportRows().filter(isMachineRow);
+      const allRows = getReportRows();
+      const machineRows = allRows.filter(isMachineRow);
+      const locationMaps = getDashboardLocationMaps(allRows);
       const sections = [];
       pushExportSection(sections, 'eqMachineBody', 'Machine Tracking',
-        ['Machine Type', 'Status', 'Incident #', 'Barwa #', 'Date', 'Notes'],
+        ['Machine Type', 'Status', 'Location', 'Incident #', 'Barwa #', 'Date', 'Notes'],
         machineRows.map(function(row){
-          return [getMachineType(row) || row.machine || '', row.machineStatus || row.action || '', row.incidentNumber || '', row.barwaNumber || '', row.date || '', row.notes || ''];
+          const loc = formatEquipmentLocationLabel(getRowLocationParts(row, locationMaps));
+          return [getMachineType(row) || row.machine || '', row.machineStatus || row.action || '', loc, row.incidentNumber || '', row.barwaNumber || '', row.date || '', row.notes || ''];
         }));
       return sections;
     }
@@ -6910,23 +8049,28 @@ body.entry-modal-open{
       const warnStock = stockList.filter(function(item){ return item.balance <= 0; });
       const sections = [];
 
+      const locationMaps = getDashboardLocationMaps(allRows);
+
       pushExportSection(sections, 'alertNearExpiryBody', 'Near Expiry Items',
-        ['Item', 'Category', 'Qty', 'Expiry Date', 'Days Remaining'],
+        ['Item', 'Category', 'Location', 'Qty', 'Expiry Date', 'Days Remaining'],
         nearRows.map(function(row){
           const days = daysRemaining(row.expiryDate);
-          return [formatItemLabel(row), row.category || '', row.quantity ?? '', row.expiryDate || '', days == null ? '' : days];
+          const loc = formatEquipmentLocationLabel(getRowLocationParts(row, locationMaps));
+          return [formatItemLabel(row), row.category || '', loc, row.quantity ?? '', row.expiryDate || '', days == null ? '' : days];
         }));
 
       pushExportSection(sections, 'alertExpiredBody', 'Expired Items',
-        ['Item', 'Category', 'Qty', 'Expiry Date', 'Status'],
+        ['Item', 'Category', 'Location', 'Qty', 'Expiry Date', 'Status'],
         expiredRows.map(function(row){
-          return [formatItemLabel(row), row.category || '', row.quantity ?? '', row.expiryDate || '', row.validity || 'Expired'];
+          const loc = formatEquipmentLocationLabel(getRowLocationParts(row, locationMaps));
+          return [formatItemLabel(row), row.category || '', loc, row.quantity ?? '', row.expiryDate || '', row.validity || 'Expired'];
         }));
 
       pushExportSection(sections, 'alertStockBody', 'Stock Warnings (Low or Negative Available)',
-        ['Item', 'Category', 'Received', 'Consumed', 'Available'],
+        ['Item', 'Category', 'Location', 'Received', 'Consumed', 'Available'],
         warnStock.map(function(item){
-          return [item.label, item.category, item.received, item.consumed, item.balance];
+          const loc = formatEquipmentLocationLabel(getStockEntryLocationParts(item, locationMaps));
+          return [item.label, item.category, loc, item.received, item.consumed, item.balance];
         }));
 
       return sections;
@@ -7112,6 +8256,302 @@ body.entry-modal-open{
       return label;
     }
 
+    function formatItemLocation(row){
+      if(isMachineRow(row)) return formatEquipmentLocationLabel(formatEquipmentLocationParts(row));
+      return row.itemWhere || '';
+    }
+
+    function getEquipmentKey(row){
+      const type = String(getMachineType(row) || row.machine || 'Unknown').trim();
+      const tag = row.incidentNumber || row.barwaNumber || row.indentNumber || '';
+      return tag ? type + '|' + tag : type;
+    }
+
+    function formatEquipmentLocationParts(row){
+      if(row && row.device !== undefined){
+        return { device: row.device || '', storage: row.storage || '' };
+      }
+      return {
+        device: row.deviceLocation || '',
+        storage: row.itemWhere || ''
+      };
+    }
+
+    function formatEquipmentLocationLabel(parts){
+      const lines = [];
+      if(parts.device) lines.push(parts.device);
+      if(parts.storage && parts.storage !== parts.device) lines.push(parts.storage);
+      return lines.join(' · ');
+    }
+
+    function buildLatestEquipmentLocationMap(rows){
+      const map = {};
+      rows.filter(isMachineRow).forEach(function(row){
+        const parts = formatEquipmentLocationParts(row);
+        if(!parts.device && !parts.storage) return;
+        const key = getEquipmentKey(row);
+        const rowDate = parseReportDate(row.date) || new Date(0);
+        const prev = map[key];
+        if(!prev || rowDate >= prev.date){
+          map[key] = { device: parts.device, storage: parts.storage, date: rowDate };
+        }
+      });
+      return map;
+    }
+
+    function getDashboardLocationMaps(rows){
+      rows = rows || getReportRows();
+      return {
+        items: buildLatestItemLocationMap(rows),
+        equipment: buildLatestEquipmentLocationMap(rows)
+      };
+    }
+
+    function getRowLocationParts(row, maps){
+      maps = maps || getDashboardLocationMaps();
+      if(isMachineRow(row)){
+        const key = getEquipmentKey(row);
+        const entry = maps.equipment[key];
+        if(entry) return formatEquipmentLocationParts(entry);
+        return formatEquipmentLocationParts(row);
+      }
+      const key = getStockItemKey(row);
+      const itemEntry = maps.items[key];
+      const storage = (itemEntry && itemEntry.location) || row.itemWhere || '';
+      return { device: '', storage: storage };
+    }
+
+    function getStockEntryLocationParts(entry, maps){
+      maps = maps || getDashboardLocationMaps();
+      const itemEntry = maps.items[entry.key];
+      return { device: '', storage: (itemEntry && itemEntry.location) || '' };
+    }
+
+    function hoverRowAttributes(parts){
+      const locLabel = formatEquipmentLocationLabel(parts);
+      const hasLoc = !!locLabel;
+      const titleAttr = ' title="' + escapeReportText(locLabel ? 'Location: ' + locLabel : 'Location not recorded') + '"';
+      return {
+        hasLoc: hasLoc,
+        open: '<tr class="eq-hover-row"' + (hasLoc ? '' : ' data-eq-no-location') + ' tabindex="0"' + titleAttr + '>'
+      };
+    }
+
+    function renderLocationHoverCell(innerHtml, parts){
+      const locLabel = formatEquipmentLocationLabel(parts);
+      const hasLoc = !!locLabel;
+      return '<td class="eq-machine-cell' + (hasLoc ? ' has-eq-tooltip' : '') + '">' +
+        innerHtml +
+        (hasLoc ? '<span class="eq-location-pin" aria-hidden="true">📍</span>' : '') +
+        buildLocationTooltip(parts) +
+      '</td>';
+    }
+
+    function buildLocationTooltip(parts){
+      const hasDevice = !!(parts && parts.device);
+      const hasStorage = !!(parts && parts.storage);
+      const hasLoc = hasDevice || hasStorage;
+      let html = '<div class="eq-location-tooltip' + (hasLoc ? '' : ' eq-location-tooltip--empty') + '">';
+      html += '<span class="eq-location-tooltip-title">📍 Current Location</span>';
+      if(!hasLoc){
+        html += '<strong>Not recorded</strong>';
+      }else{
+        if(hasDevice){
+          html += '<div class="eq-location-tooltip-row"><small>Device status</small><strong>' + escapeReportText(parts.device) + '</strong></div>';
+        }
+        if(hasStorage){
+          html += '<div class="eq-location-tooltip-row"><small>' + (hasDevice ? 'Storage / Ward' : 'Location') + '</small><strong>' + escapeReportText(parts.storage) + '</strong></div>';
+        }
+      }
+      html += '</div>';
+      return html;
+    }
+
+    function buildEquipmentLocationTooltip(parts){
+      return buildLocationTooltip(parts);
+    }
+
+    function renderMachineTableRow(row, locationMaps){
+      const parts = getRowLocationParts(row, locationMaps);
+      const h = hoverRowAttributes(parts);
+      const machineName = getMachineType(row) || row.machine || '—';
+      return h.open +
+        renderLocationHoverCell(escapeReportText(machineName), parts) +
+        '<td>' + escapeReportText(row.machineStatus || row.action || '—') + '</td>' +
+        '<td>' + escapeReportText(row.incidentNumber || '—') + '</td>' +
+        '<td>' + escapeReportText(row.barwaNumber || '—') + '</td>' +
+        '<td>' + escapeReportText(row.date || '—') + '</td>' +
+        '<td>' + escapeReportText(row.notes || '—') + '</td>' +
+      '</tr>';
+    }
+
+    function renderExpiryItemRow(row, locationMaps, daysRemainingValue, statusText){
+      const parts = getRowLocationParts(row, locationMaps);
+      const h = hoverRowAttributes(parts);
+      let lastCell = '';
+      if(typeof statusText !== 'undefined'){
+        lastCell = '<td>' + escapeReportText(statusText || 'Expired') + '</td>';
+      }else{
+        lastCell = '<td>' + (daysRemainingValue == null ? '—' : daysRemainingValue + ' days') + '</td>';
+      }
+      return h.open +
+        renderLocationHoverCell(escapeReportText(formatItemLabel(row)), parts) +
+        '<td>' + escapeReportText(row.category || '—') + '</td>' +
+        '<td>' + escapeReportText(row.quantity ?? '—') + '</td>' +
+        '<td>' + escapeReportText(row.expiryDate || '—') + '</td>' +
+        lastCell +
+      '</tr>';
+    }
+
+    function renderInventoryLogRow(row, locationMaps){
+      const parts = getRowLocationParts(row, locationMaps);
+      const h = hoverRowAttributes(parts);
+      return h.open +
+        '<td>' + escapeReportText(row.date || '—') + '</td>' +
+        '<td>' + escapeReportText(row.category || '—') + '</td>' +
+        renderLocationHoverCell(escapeReportText(formatItemLabel(row)), parts) +
+        '<td>' + escapeReportText(row.action || '—') + '</td>' +
+        '<td>' + escapeReportText(row.quantity ?? '—') + '</td>' +
+        '<td>' + escapeReportText(row.expiryDate || '—') + '</td>' +
+        '<td>' + escapeReportText(row.validity || '—') + '</td>' +
+        '<td>' + escapeReportText(row.incidentNumber || '—') + '</td>' +
+        '<td>' + escapeReportText(row.barwaNumber || '—') + '</td>' +
+      '</tr>';
+    }
+
+    function renderAlertItemRow(row, locationMaps, daysRemainingValue, statusText){
+      const parts = getRowLocationParts(row, locationMaps);
+      const locLabel = formatEquipmentLocationLabel(parts);
+      const h = hoverRowAttributes(parts);
+      let lastCell = '';
+      if(typeof statusText !== 'undefined'){
+        lastCell = '<td>' + escapeReportText(statusText || 'Expired') + '</td>';
+      }else{
+        lastCell = '<td>' + (daysRemainingValue == null ? '—' : daysRemainingValue + ' days') + '</td>';
+      }
+      return h.open +
+        renderLocationHoverCell(escapeReportText(formatItemLabel(row)), parts) +
+        '<td>' + escapeReportText(row.category || '—') + '</td>' +
+        '<td>' + renderLocationBadge(locLabel) + '</td>' +
+        '<td>' + escapeReportText(row.quantity ?? '—') + '</td>' +
+        '<td>' + escapeReportText(row.expiryDate || '—') + '</td>' +
+        lastCell +
+      '</tr>';
+    }
+
+    function getLocationBadgeClass(location){
+      const loc = String(location || '').toLowerCase().trim();
+      if(!loc) return 'loc-unknown';
+      if(loc.includes('office') || loc.includes('store')) return 'loc-store';
+      if(loc === 'phdu') return 'loc-phdu';
+      if(/^pw\d/.test(loc) || loc.startsWith('pw')) return 'loc-ward';
+      if(loc.includes('picu') || loc.includes('per') || loc.includes('onco')) return 'loc-unit';
+      if(loc.includes('patient') || loc.includes('issued') || loc.includes('nurse') || loc.includes('doctor') || loc.includes('rt')) return 'loc-issued';
+      if(loc.includes('biomed') || loc.includes('company')) return 'loc-biomed';
+      return 'loc-default';
+    }
+
+    function renderLocationBadge(location){
+      if(!location) return '<span class="location-badge loc-unknown"><span class="location-badge-icon" aria-hidden="true">📍</span>Not recorded</span>';
+      return '<span class="location-badge ' + getLocationBadgeClass(location) + '"><span class="location-badge-icon" aria-hidden="true">📍</span>' + escapeReportText(location) + '</span>';
+    }
+
+    function buildLatestItemLocationMap(rows){
+      const map = {};
+      rows.forEach(function(row){
+        if(isMachineRow(row)) return;
+        const loc = row.itemWhere || '';
+        if(!loc) return;
+        const key = getStockItemKey(row);
+        const rowDate = parseReportDate(row.date) || new Date(0);
+        const prev = map[key];
+        if(!prev || rowDate >= prev.date){
+          map[key] = { location: loc, date: rowDate, label: formatItemLabel(row), category: row.category || '—' };
+        }
+      });
+      return map;
+    }
+
+    function renderAlertLocationPanel(alertItems){
+      const panel = document.getElementById('alertLocationPanel');
+      const grid = document.getElementById('alertLocationGrid');
+      if(!panel || !grid) return;
+
+      const seen = {};
+      const uniqueItems = [];
+      alertItems.forEach(function(entry){
+        const dedupeKey = entry.key + '|' + entry.tag;
+        if(seen[dedupeKey]) return;
+        seen[dedupeKey] = true;
+        uniqueItems.push(entry);
+      });
+
+      const locatedItems = uniqueItems.filter(function(entry){ return !!entry.location; });
+      if(!locatedItems.length){
+        panel.hidden = true;
+        grid.innerHTML = '';
+        return;
+      }
+
+      const byZone = {};
+      locatedItems.forEach(function(entry){
+        const zone = entry.location;
+        if(!byZone[zone]) byZone[zone] = [];
+        byZone[zone].push(entry);
+      });
+
+      const zones = Object.keys(byZone).sort(function(a, b){
+        if(a === 'PHDU') return -1;
+        if(b === 'PHDU') return 1;
+        if(a === 'Office Store') return -1;
+        if(b === 'Office Store') return 1;
+        return a.localeCompare(b);
+      });
+
+      panel.hidden = false;
+      grid.innerHTML = zones.map(function(zone){
+        const items = byZone[zone];
+        return '<div class="alert-location-zone">' +
+          '<div class="alert-location-zone-head">' +
+            renderLocationBadge(zone) +
+            '<span class="alert-location-count">' + items.length + ' item' + (items.length !== 1 ? 's' : '') + '</span>' +
+          '</div>' +
+          '<ul class="alert-location-items">' +
+            items.map(function(item){
+              return '<li><span class="alert-location-item-name">' + escapeReportText(item.label) + '</span>' +
+                '<span class="alert-item-tag ' + item.tagClass + '">' + escapeReportText(item.tag) + '</span></li>';
+            }).join('') +
+          '</ul></div>';
+      }).join('');
+    }
+
+    function renderAlertStockTable(itemStockList, locationMaps, bodyId){
+      const body = document.getElementById(bodyId || 'alertStockBody');
+      if(!body) return;
+      const card = body.closest('.dashboard-card');
+      const hasData = itemStockList.length > 0;
+      if(card) card.hidden = !hasData;
+      if(!hasData){
+        body.innerHTML = '';
+        return;
+      }
+      const maps = locationMaps && locationMaps.items ? locationMaps : { items: locationMaps || {}, equipment: {} };
+      body.innerHTML = itemStockList.map(function(entry){
+        const parts = getStockEntryLocationParts(entry, maps);
+        const locLabel = formatEquipmentLocationLabel(parts);
+        const h = hoverRowAttributes(parts);
+        const balanceClass = entry.balance < 0 ? ' style="color:#dc2626;font-weight:800;"' : (entry.balance === 0 ? '' : ' style="color:#059669;font-weight:800;"');
+        return h.open +
+          renderLocationHoverCell(escapeReportText(entry.label), parts) +
+          '<td>' + escapeReportText(entry.category) + '</td>' +
+          '<td>' + renderLocationBadge(locLabel) + '</td>' +
+          '<td>' + entry.received + '</td>' +
+          '<td>' + entry.consumed + '</td>' +
+          '<td' + balanceClass + '>' + entry.balance + '</td>' +
+        '</tr>';
+      }).join('');
+    }
+
     function getValidityBadge(validity){
       const value = String(validity || '').toLowerCase();
       if(value.includes('expired') && !value.includes('near')) return { text:validity || 'Expired', className:'expired' };
@@ -7220,23 +8660,29 @@ body.entry-modal-open{
         el.hidden = !getReportRows().length;
       });
 
+      const hint = document.getElementById('reportLocationHint');
+      if(hint) hint.hidden = !hasData;
+
       if(!hasData){
         body.innerHTML = '';
         return;
       }
 
-      body.innerHTML = rows.map(row => {
+      const locationMaps = getDashboardLocationMaps(allRows);
+      body.innerHTML = rows.map(function(row){
         const badge = getValidityBadge(row.validity);
-        return `<tr>
-          <td>${escapeReportText(row.date || '—')}</td>
-          <td>${escapeReportText(row.category || '—')}</td>
-          <td>${escapeReportText(formatItemLabel(row))}</td>
-          <td>${escapeReportText(row.action || '—')}</td>
-          <td>${escapeReportText(getStockUsageLabel(row))}</td>
-          <td>${escapeReportText(row.quantity ?? '—')}</td>
-          <td>${escapeReportText(row.expiryDate || '—')}</td>
-          <td><span class="report-badge ${badge.className}">${escapeReportText(badge.text)}</span></td>
-        </tr>`;
+        const parts = getRowLocationParts(row, locationMaps);
+        const h = hoverRowAttributes(parts);
+        return h.open +
+          '<td>' + escapeReportText(row.date || '—') + '</td>' +
+          '<td>' + escapeReportText(row.category || '—') + '</td>' +
+          renderLocationHoverCell(escapeReportText(formatItemLabel(row)), parts) +
+          '<td>' + escapeReportText(row.action || '—') + '</td>' +
+          '<td>' + escapeReportText(getStockUsageLabel(row)) + '</td>' +
+          '<td>' + escapeReportText(row.quantity ?? '—') + '</td>' +
+          '<td>' + escapeReportText(row.expiryDate || '—') + '</td>' +
+          '<td><span class="report-badge ' + badge.className + '">' + escapeReportText(badge.text) + '</span></td>' +
+        '</tr>';
       }).join('');
     }
     let expiryChartResizeTimer;
@@ -7250,6 +8696,7 @@ body.entry-modal-open{
       if(!ok) return;
 
       initReportFilterDropdowns();
+      initTrachFefoChips();
 
       if(localStorage.getItem(CRITICAL_INVENTORY_VERSION_KEY) !== CRITICAL_INVENTORY_DATA_VERSION){
         localStorage.removeItem(CRITICAL_INVENTORY_KEY);
